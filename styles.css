@@ -616,10 +616,11 @@ ul, ol {
   gap: var(--spacing-4);
   position: relative;
   z-index: 1;
-  transition: color 260ms ease;
+  transition: color 260ms ease, background-color 260ms ease;
 }
 
 .persona-switcher__item--active {
+  background: rgba(197, 201, 211, 0.22);
   color: var(--text-primary);
 }
 
@@ -1465,10 +1466,10 @@ ul, ol {
 
   /* ── Comms carousel — no bleed at desktop, JS recalculates --card-w ── */
   .comms-carousel {
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    max-width: 1368px;
+    margin-left: 0;
+    margin-right: 0;
     height: 400px;
   }
 

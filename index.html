@@ -1210,6 +1210,13 @@
     var options = Array.prototype.slice.call(document.querySelectorAll('.persona-sheet__option'));
     if (!pill || !label || !sheet || !panel || !backdrop || !closeBtn || !options.length || !desktopItems.length) return;
 
+    if (switcher && !glider) {
+      glider = document.createElement('span');
+      glider.className = 'persona-switcher__glider';
+      glider.setAttribute('aria-hidden', 'true');
+      switcher.insertBefore(glider, switcher.firstChild);
+    }
+
     function isDesktop() {
       return window.matchMedia('(min-width: 1280px)').matches;
     }
@@ -1237,15 +1244,21 @@
       pill.setAttribute('aria-expanded', 'false');
     }
 
-    function syncGlider() {
+    function syncGlider(immediate) {
       if (!switcher || !glider) return;
       var active = desktopItems.find(function (item) {
         return item.classList.contains('persona-switcher__item--active');
       });
       if (!active) return;
+      if (immediate) glider.style.transition = 'none';
       glider.style.width = active.offsetWidth + 'px';
-      glider.style.transform = 'translateX(' + active.offsetLeft + 'px)';
+      glider.style.transform = 'translate3d(' + active.offsetLeft + 'px,0,0)';
       glider.style.opacity = '1';
+      if (immediate) {
+        requestAnimationFrame(function () {
+          glider.style.transition = '';
+        });
+      }
     }
 
     function selectRole(nextRole) {
@@ -1259,7 +1272,7 @@
         var selected = opt.getAttribute('data-role') === nextRole;
         opt.classList.toggle('is-selected', selected);
       });
-      requestAnimationFrame(syncGlider);
+      requestAnimationFrame(function () { syncGlider(false); });
     }
 
     desktopItems.forEach(function (item) {
@@ -1292,13 +1305,21 @@
 
     window.addEventListener('resize', function () {
       if (isDesktop() && !sheet.hidden) closeSheet();
-      syncGlider();
+      syncGlider(true);
     });
 
     var initialActive = desktopItems.find(function (item) {
       return item.classList.contains('persona-switcher__item--active');
     });
     selectRole(initialActive ? initialActive.textContent.trim() : 'Student');
+    window.addEventListener('load', function () {
+      syncGlider(true);
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        syncGlider(true);
+      });
+    }
   })();
 </script>
 </body>
