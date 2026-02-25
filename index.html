@@ -50,10 +50,12 @@
 
     <!-- Tablet + Desktop: full tab strip, centered -->
     <nav class="persona-switcher" aria-label="Select persona">
+      <span class="persona-switcher__glider" aria-hidden="true"></span>
       <button class="persona-switcher__item persona-switcher__item--active" aria-pressed="true">Student</button>
       <button class="persona-switcher__item" aria-pressed="false">Faculty</button>
       <button class="persona-switcher__item" aria-pressed="false">Staff</button>
       <button class="persona-switcher__item" aria-pressed="false">Applicant</button>
+      <button class="persona-switcher__item" aria-pressed="false">Alumni</button>
     </nav>
 
     <div class="navbar__actions">
@@ -90,6 +92,12 @@
       </button>
       <button class="persona-sheet__option" type="button" data-role="Staff">
         <span>Staff</span>
+        <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="persona-sheet__option" type="button" data-role="Applicant">
+        <span>Applicant</span>
         <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -548,6 +556,11 @@
     var slotW    = 0; /* card width + gap */
     var headIdx  = 0; /* slides[] index of the leftmost card in DOM */
     var dots     = [];
+    var dragActive = false;
+    var dragStartX = 0;
+    var dragDeltaX = 0;
+    var dragStartY = 0;
+    var dragAxis = 'undecided';
 
     function normalizeCenterCard() {
       var cards = track.querySelectorAll('.comms-card');
@@ -732,9 +745,91 @@
     updateDots();
     window.addEventListener('resize', calcLayout);
 
-    /* Pause on touch */
-    track.addEventListener('touchstart', stop, { passive: true });
-    track.addEventListener('touchend', function () { setTimeout(start, DELAY); }, { passive: true });
+    function resetTrackToBase() {
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(' + currentX + 'px)';
+    }
+
+    function startDrag(clientX) {
+      if (busy) return false;
+      dragActive = true;
+      dragStartX = clientX;
+      dragStartY = 0;
+      dragDeltaX = 0;
+      dragAxis = 'undecided';
+      stop();
+      track.classList.add('is-dragging');
+      track.style.transition = 'none';
+      return true;
+    }
+
+    function moveDrag(clientX, clientY, event) {
+      if (!dragActive || busy) return;
+      var deltaY = clientY - dragStartY;
+      dragDeltaX = clientX - dragStartX;
+
+      if (dragAxis === 'undecided') {
+        if (Math.abs(dragDeltaX) < 6 && Math.abs(deltaY) < 6) return;
+        dragAxis = Math.abs(dragDeltaX) >= Math.abs(deltaY) ? 'x' : 'y';
+      }
+
+      if (dragAxis !== 'x') return;
+      if (event && event.cancelable) event.preventDefault();
+      track.style.transform = 'translateX(' + (currentX + dragDeltaX) + 'px)';
+    }
+
+    function endDrag() {
+      if (!dragActive) return;
+      dragActive = false;
+      track.classList.remove('is-dragging');
+      if (dragAxis !== 'x') {
+        dragDeltaX = 0;
+        setTimeout(start, DELAY);
+        return;
+      }
+      var delta = dragDeltaX;
+      dragDeltaX = 0;
+      var threshold = Math.max(48, slotW * 0.16);
+      if (Math.abs(delta) >= threshold) {
+        resetTrackToBase();
+        if (delta < 0) advance();
+        else prev();
+      } else {
+        setTrackX(currentX, true);
+      }
+      setTimeout(start, DELAY);
+    }
+
+    track.addEventListener('mousedown', function (event) {
+      if (event.button !== 0) return;
+      if (!startDrag(event.clientX)) return;
+      dragStartY = event.clientY;
+    });
+    window.addEventListener('mousemove', function (event) {
+      moveDrag(event.clientX, event.clientY, event);
+    });
+    window.addEventListener('mouseup', function () {
+      endDrag();
+    });
+
+    track.addEventListener('touchstart', function (event) {
+      if (!event.touches || !event.touches.length) return;
+      if (!startDrag(event.touches[0].clientX)) return;
+      dragStartY = event.touches[0].clientY;
+    }, { passive: true });
+    track.addEventListener('touchmove', function (event) {
+      if (!event.touches || !event.touches.length) return;
+      moveDrag(event.touches[0].clientX, event.touches[0].clientY, event);
+    }, { passive: false });
+    track.addEventListener('touchend', function () {
+      endDrag();
+    }, { passive: true });
+    track.addEventListener('touchcancel', function () {
+      endDrag();
+    }, { passive: true });
+    track.addEventListener('dragstart', function (event) {
+      event.preventDefault();
+    });
 
     if (nextBtn) {
       nextBtn.addEventListener('click', function () {
@@ -858,6 +953,42 @@
         track.scrollBy({ left: step(), behavior: 'smooth' });
       });
     });
+
+    var isPointerDown = false;
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+    var activePointerId = null;
+
+    track.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      isPointerDown = true;
+      activePointerId = event.pointerId;
+      dragStartX = event.clientX;
+      dragStartScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
+      if (track.setPointerCapture) track.setPointerCapture(event.pointerId);
+    });
+
+    track.addEventListener('pointermove', function (event) {
+      if (!isPointerDown || activePointerId !== event.pointerId) return;
+      var deltaX = event.clientX - dragStartX;
+      track.scrollLeft = dragStartScroll - deltaX;
+    });
+
+    function endPointerDrag(event) {
+      if (!isPointerDown) return;
+      if (event && activePointerId !== null && event.pointerId !== undefined && activePointerId !== event.pointerId) return;
+      if (event && track.releasePointerCapture && activePointerId !== null) {
+        try { track.releasePointerCapture(activePointerId); } catch (e) {}
+      }
+      isPointerDown = false;
+      activePointerId = null;
+      track.classList.remove('is-dragging');
+    }
+
+    track.addEventListener('pointerup', endPointerDrag);
+    track.addEventListener('pointercancel', endPointerDrag);
+    track.addEventListener('lostpointercapture', endPointerDrag);
 
     function initWithRetries(triesLeft) {
       requestAnimationFrame(function () {
@@ -1065,16 +1196,19 @@
     });
   })();
 
-  /* ── Mobile/Tablet role bottom sheet ─────────────────────── */
+  /* ── Persona selection sync (desktop tabs + mobile sheet) ── */
   (function () {
     var pill = document.querySelector('.persona-pill');
     var label = document.querySelector('.persona-pill__label');
+    var switcher = document.querySelector('.persona-switcher');
+    var glider = switcher ? switcher.querySelector('.persona-switcher__glider') : null;
+    var desktopItems = Array.prototype.slice.call(document.querySelectorAll('.persona-switcher__item'));
     var sheet = document.querySelector('.persona-sheet');
     var panel = document.querySelector('.persona-sheet__panel');
     var backdrop = document.querySelector('.persona-sheet-backdrop');
     var closeBtn = document.querySelector('.persona-sheet__close');
     var options = Array.prototype.slice.call(document.querySelectorAll('.persona-sheet__option'));
-    if (!pill || !label || !sheet || !panel || !backdrop || !closeBtn || !options.length) return;
+    if (!pill || !label || !sheet || !panel || !backdrop || !closeBtn || !options.length || !desktopItems.length) return;
 
     function isDesktop() {
       return window.matchMedia('(min-width: 1280px)').matches;
@@ -1103,13 +1237,36 @@
       pill.setAttribute('aria-expanded', 'false');
     }
 
+    function syncGlider() {
+      if (!switcher || !glider) return;
+      var active = desktopItems.find(function (item) {
+        return item.classList.contains('persona-switcher__item--active');
+      });
+      if (!active) return;
+      glider.style.width = active.offsetWidth + 'px';
+      glider.style.transform = 'translateX(' + active.offsetLeft + 'px)';
+      glider.style.opacity = '1';
+    }
+
     function selectRole(nextRole) {
       label.textContent = nextRole;
+      desktopItems.forEach(function (item) {
+        var selected = item.textContent.trim() === nextRole;
+        item.classList.toggle('persona-switcher__item--active', selected);
+        item.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
       options.forEach(function (opt) {
         var selected = opt.getAttribute('data-role') === nextRole;
         opt.classList.toggle('is-selected', selected);
       });
+      requestAnimationFrame(syncGlider);
     }
+
+    desktopItems.forEach(function (item) {
+      item.addEventListener('click', function () {
+        selectRole(item.textContent.trim());
+      });
+    });
 
     pill.addEventListener('click', function () {
       if (sheet.hidden) openSheet();
@@ -1135,7 +1292,13 @@
 
     window.addEventListener('resize', function () {
       if (isDesktop() && !sheet.hidden) closeSheet();
+      syncGlider();
     });
+
+    var initialActive = desktopItems.find(function (item) {
+      return item.classList.contains('persona-switcher__item--active');
+    });
+    selectRole(initialActive ? initialActive.textContent.trim() : 'Student');
   })();
 </script>
 </body>
