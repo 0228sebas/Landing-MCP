@@ -260,7 +260,7 @@ ul, ol {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-24) var(--spacing-16) var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-16) var(--spacing-8);
   background: var(--surface-primary);
   position: fixed;
   top: 0;
@@ -314,7 +314,7 @@ ul, ol {
   padding: var(--spacing-16);
   position: absolute;
   left: 50%;
-  top: var(--spacing-24);
+  top: var(--spacing-16);
   transform: translateX(-50%);
   z-index: 101;
   width: min(560px, calc(100vw - 56px));
@@ -437,7 +437,7 @@ ul, ol {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: var(--spacing-24);
+  top: var(--spacing-16);
   width: clamp(140px, calc(100vw - 270px), 560px);
   z-index: 101;
 }
@@ -573,13 +573,30 @@ ul, ol {
 .persona-switcher {
   display: none;
   align-items: center;
+  position: relative;
   gap: var(--spacing-4);
   background: var(--surface-secondary);
   padding: var(--spacing-4);
   border-radius: var(--spacing-20);
   box-shadow: var(--shadow-elevation);
-  overflow: visible;
+  overflow: hidden;
   flex-shrink: 0;
+}
+
+.persona-switcher__glider {
+  position: absolute;
+  top: var(--spacing-4);
+  left: 0;
+  height: calc(100% - (2 * var(--spacing-4)));
+  border-radius: var(--spacing-16);
+  background: rgba(197, 201, 211, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 10px 24px rgba(9, 31, 63, 0.12);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), width 420ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 220ms ease;
 }
 
 .persona-switcher__item {
@@ -597,12 +614,20 @@ ul, ol {
   flex-shrink: 0;
   cursor: pointer;
   gap: var(--spacing-4);
+  position: relative;
+  z-index: 1;
+  transition: color 260ms ease;
 }
 
 .persona-switcher__item--active {
-  background: var(--neutral-400);
-  border-radius: var(--spacing-16);
   color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .persona-switcher__glider,
+  .persona-switcher__item {
+    transition: none;
+  }
 }
 
 
@@ -698,9 +723,16 @@ ul, ol {
   gap: var(--c-gap);
   align-items: center; /* vertically center shorter side cards */
   will-change: transform;
+  touch-action: pan-y;
+  cursor: grab;
   /* Initial offset positions card[1] (center) correctly on mobile.
      JS overrides this value on every init / resize.             */
   transform: translateX(calc(3 * var(--c-peek) + 2 * var(--c-gap) - 100vw));
+}
+
+.comms-carousel__track.is-dragging {
+  cursor: grabbing;
+  user-select: none;
 }
 
 /* Side cards — Figma 316×268 ratio */
@@ -964,14 +996,21 @@ ul, ol {
   gap: var(--spacing-16);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  touch-action: pan-y;
   -ms-overflow-style: none;
   scrollbar-width: none;
   flex: 1;
   padding: var(--spacing-8) 0;
+  cursor: grab;
 }
 
 .app-carousel__track::-webkit-scrollbar {
   display: none;
+}
+
+.app-carousel__track.is-dragging {
+  cursor: grabbing;
+  user-select: none;
 }
 
 .app-card {
@@ -1180,7 +1219,7 @@ ul, ol {
 
   /* ── Navbar ── */
   .navbar {
-    padding: var(--spacing-20) var(--spacing-40);
+    padding: var(--spacing-16) var(--spacing-40);
     gap: var(--spacing-8);
   }
 
@@ -1195,7 +1234,7 @@ ul, ol {
   }
 
   .page.search-active .navbar {
-    padding: var(--spacing-20) var(--spacing-40);
+    padding: var(--spacing-16) var(--spacing-40);
   }
 
   .page.search-active .navbar-search {
@@ -1359,7 +1398,7 @@ ul, ol {
   /* ── Navbar ── */
   .navbar {
     flex-wrap: nowrap;
-    padding: var(--spacing-40) var(--spacing-80) var(--spacing-8);
+    padding: var(--spacing-16) var(--spacing-80) var(--spacing-8);
     align-items: flex-start;
     justify-content: space-between;
   }
@@ -1379,7 +1418,7 @@ ul, ol {
   }
 
   .navbar-search {
-    top: var(--spacing-40);
+    top: var(--spacing-16);
     width: 651px;
     height: 52px;
   }
@@ -1389,7 +1428,7 @@ ul, ol {
   }
 
   .page.search-active .navbar-search {
-    top: 38px;
+    top: 16px;
     width: min(651px, calc(100vw - 620px));
     max-width: 651px;
     z-index: 101;
@@ -1399,9 +1438,9 @@ ul, ol {
   .persona-switcher {
     position: absolute;
     left: 50%;
-    top: var(--spacing-40);
+    top: var(--spacing-16);
     transform: translateX(-50%);
-    overflow: visible;
+    overflow: hidden;
     flex-shrink: 0;
   }
 
