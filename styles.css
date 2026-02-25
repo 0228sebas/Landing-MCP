@@ -1,0 +1,1588 @@
+/* =============================================================
+   styles.css — MyFIU Landing Page
+   Architecture: Mobile-first (base = 390px)
+   Breakpoints:  @media (min-width: 768px)   — tablet
+                 @media (min-width: 1280px)  — desktop
+   Design tokens: Onyx Design System (design-system.md)
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS
+   Forward-slashes in Figma variable paths replaced with hyphens.
+   e.g.  spacing/24  →  --spacing-24
+   ───────────────────────────────────────────────────────────── */
+:root {
+
+  /* ── Carousel geometry ── */
+  --c-peek: 28px; /* amount each side card is visible */
+  --c-gap:  40px;  /* gap between cards */
+
+  /* ── Primitives: Spacing ── */
+  --spacing-4:  4px;
+  --spacing-8:  8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-18: 18px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-26: 26px;
+  --spacing-32: 32px;
+  --spacing-34: 34px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+
+  /* ── 40/Semibold — raw values, no token binding in Figma ── */
+  --font-size-40:    40px;
+  --line-height-40:  42px;
+
+  /* ── CTA gradient stop 1 (desktop Figma node 1842:739) ── */
+  --gradient-cta-from: #073bb1;
+
+  /* ── Primitives: Brand ── */
+  --brand-fiu-blue: #091f3f;
+
+  /* ── Primitives: Neutral ── */
+  --neutral-400: #d4d4dc;
+
+  /* ── Primitives: Font Size ── */
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-24: 24px;
+  --font-size-32: 32px;
+
+  /* ── Primitives: Font Weight ── */
+  --font-weight-semibold: 600;
+
+  /* ── Primitives: Font Family ── */
+  --font-family-sm:  'Proxima Nova', system-ui, sans-serif;
+  --font-family-m:   'Proxima Nova', system-ui, sans-serif;
+  --font-family-l:   'Proxima Nova', system-ui, sans-serif;
+  --font-family-3xl: 'Proxima Nova', system-ui, sans-serif;
+
+  /* ── Tokens: Surface ── */
+  --surface-primary:   #f2f2f7;
+  --surface-secondary: #ffffff;
+
+  /* ── Tokens: Text ── */
+  --text-primary:   #091f3f;
+  --text-secondary: #767676;
+  --text-invert:    #ffffff;
+  --text-warning:   #9f5109;
+
+  /* ── Tokens: Surface (extended) ── */
+  --surface-category-input: #d4d4dc;
+
+  /* ── Tokens: Button ── */
+  --button-primary:   #091f3f;
+  --button-emphasis:  #354ed4;
+  --button-teritiary: #ffffff;
+
+  /* ── Tokens: Status ── */
+  --status-yellow-10: #f1eae5;
+
+  /* ── Named Effect Styles ── */
+  --shadow-elevation: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  --shadow-text:      1px 1px 1px rgba(0, 0, 0, 0.90);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. RESET & BASE
+   ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-20);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-weight: var(--font-weight-semibold);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. TYPOGRAPHY UTILITIES
+   Named text styles from design-system.md — Collection 3
+   ───────────────────────────────────────────────────────────── */
+
+.type-14 {
+  font-family: var(--font-family-sm);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-16);
+  letter-spacing: 0;
+}
+
+.type-16 {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-18);
+  letter-spacing: 0;
+}
+
+.type-18 {
+  font-family: var(--font-family-l);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-20);
+  letter-spacing: 0;
+}
+
+.type-24 {
+  font-family: var(--font-family-3xl);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-26);
+  letter-spacing: 0;
+}
+
+.type-32 {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-34);
+  letter-spacing: 0;
+}
+
+/* 40/Semibold — raw values, no variable binding in Figma */
+.type-40 {
+  font-family: var(--font-family-3xl);
+  font-size: var(--font-size-40);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-40);
+  letter-spacing: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. BUTTONS
+   ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--spacing-24);
+  font-family: var(--font-family-l);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-20);
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+}
+
+.btn--emphasis {
+  background: var(--button-emphasis);
+  color: var(--text-invert);
+}
+
+/* Mobile nav login button uses dark navy primary colour */
+.navbar .btn--emphasis {
+  background: var(--button-primary);
+  font-size: var(--font-size-16);
+  line-height: var(--spacing-18);
+}
+
+.btn--teritiary {
+  background: var(--button-teritiary);
+  color: var(--text-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. PAGE LAYOUT
+   Mobile: full-width, 16px padding, 40px section gaps
+   Desktop: centered at 1568px, 80px padding, 64px gaps
+   ───────────────────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  background: var(--surface-primary);
+  overflow-x: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-40);
+  padding: var(--spacing-16);
+  padding-top: 80px; /* clears fixed navbar: 24px top-pad + 40px logo + 8px bottom-pad + 8px gap */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. NAVBAR
+   Mobile:  single row — logo | persona (active only) | actions
+   Desktop: logo | [persona absolutely centered] | actions
+   ───────────────────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-24) var(--spacing-16) var(--spacing-8);
+  background: var(--surface-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  flex: 1; /* pushes pill to true center */
+  height: var(--spacing-40);
+}
+
+.navbar__logo-img {
+  height: var(--spacing-40);
+  width: auto;
+  display: block;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+  flex: 1; /* mirrors logo flex:1 so the pill stays truly centered */
+}
+
+.navbar__search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.navbar__search-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.navbar-search {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-16);
+  background: var(--surface-category-input);
+  border-radius: var(--spacing-40);
+  padding: var(--spacing-16);
+  position: absolute;
+  left: 50%;
+  top: var(--spacing-24);
+  transform: translateX(-50%);
+  z-index: 101;
+  width: min(560px, calc(100vw - 56px));
+  height: 56px;
+}
+
+.navbar-search__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.navbar-search__input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  font-weight: 500;
+  line-height: var(--spacing-18);
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+
+.navbar-search__input::placeholder {
+  color: #5b6273;
+}
+
+.navbar-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.navbar-search__clear {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.navbar-search__clear.is-visible {
+  display: inline-flex;
+}
+
+.navbar-search__clear img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.search-results {
+  display: none;
+  width: min(700px, calc(100vw - 32px));
+  margin-inline: auto;
+  margin-top: 0;
+}
+
+.search-results__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding-top: var(--spacing-24); /* 24px gap below search bar */
+}
+
+.search-result {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+}
+
+.search-result__icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
+  color: #354ed4;
+  flex-shrink: 0;
+}
+
+.search-result .quick-link__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.search-result__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  text-decoration: none;
+}
+
+.search-result__title {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-18);
+  color: var(--text-primary);
+}
+
+.search-result__subtext {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  line-height: var(--spacing-16);
+  color: var(--text-secondary);
+}
+
+.page.search-active .navbar-search {
+  display: inline-flex;
+}
+
+.page.search-active .navbar-search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: var(--spacing-24);
+  width: clamp(140px, calc(100vw - 270px), 560px);
+  z-index: 101;
+}
+
+.page.search-active .navbar .persona-pill,
+.page.search-active .navbar .persona-switcher,
+.page.search-active .main-content {
+  display: none;
+}
+
+.page.search-active .search-results {
+  display: block;
+}
+
+/* ── Mobile persona pill (Selection filters) ────────────────
+   Single compact pill — active persona name + dropdown chevron.
+   Figma mobile frame node 1446:627 · "Selection filters"
+   ──────────────────────────────────────────────────────────── */
+.persona-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  background: var(--surface-category-input);
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--spacing-16);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.persona-pill__label {
+  font-family: var(--font-family-sm);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-16);
+  color: var(--text-primary);
+}
+
+.persona-pill__chevron {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex-shrink: 0;
+}
+
+.persona-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 140;
+}
+
+.persona-sheet-backdrop.is-open {
+  opacity: 1;
+}
+
+.persona-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 141;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.persona-sheet.is-open {
+  pointer-events: auto;
+}
+
+.persona-sheet__panel {
+  width: 100%;
+  background: var(--surface-primary);
+  border-radius: var(--spacing-24) var(--spacing-24) 0 0;
+  padding: var(--spacing-24) var(--spacing-24) var(--spacing-16);
+  transform: translateY(100%);
+  transition: transform 0.22s ease;
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
+}
+
+.persona-sheet__panel.is-open {
+  transform: translateY(0);
+}
+
+.persona-sheet__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-12) 0;
+  color: var(--text-secondary);
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  line-height: var(--spacing-18);
+  font-weight: 500;
+  text-align: left;
+}
+
+.persona-sheet__option.is-selected {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.persona-sheet__check {
+  opacity: 0;
+}
+
+.persona-sheet__option.is-selected .persona-sheet__check {
+  opacity: 1;
+}
+
+.persona-sheet__close {
+  margin-top: var(--spacing-16);
+  width: 100%;
+  height: 44px;
+  border-radius: var(--spacing-24);
+  background: #d9d9df;
+  color: var(--text-primary);
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  line-height: var(--spacing-18);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Full tab strip (tablet +) ──────────────────────────────
+   Hidden on mobile, revealed at ≥ 768px
+   ──────────────────────────────────────────────────────────── */
+.persona-switcher {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-4);
+  background: var(--surface-secondary);
+  padding: var(--spacing-4);
+  border-radius: var(--spacing-20);
+  box-shadow: var(--shadow-elevation);
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.persona-switcher__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--spacing-48);
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-18);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  gap: var(--spacing-4);
+}
+
+.persona-switcher__item--active {
+  background: var(--neutral-400);
+  border-radius: var(--spacing-16);
+  color: var(--text-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. HERO SECTION
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-24);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. ALERT BANNER
+   ───────────────────────────────────────────────────────────── */
+.alert-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: var(--status-yellow-10);
+  width: var(--card-w, calc(100vw - (2 * var(--c-peek)) - (2 * var(--c-gap))));
+  margin-inline: auto;
+  padding: var(--spacing-16);
+  border-radius: var(--spacing-24);
+}
+
+.alert-banner__body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.alert-banner__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+}
+
+.alert-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-warning);
+  min-width: 0;
+}
+
+.alert-banner__title {
+  font-family: var(--font-family-l);
+  font-size: var(--font-size-18);
+  line-height: var(--spacing-20);
+}
+
+.alert-banner__desc {
+  font-family: var(--font-family-sm);
+  font-size: var(--font-size-14);
+  line-height: var(--spacing-16);
+}
+
+.alert-banner__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  color: var(--text-warning);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. COMMUNICATIONS CAROUSEL
+   Sliding-track carousel: whole cards move left/right.
+   --card-w is set by JS on init and resize.
+   Center card shows content; side cards peek at the edges.
+   ───────────────────────────────────────────────────────────── */
+.comms-carousel {
+  overflow: hidden;
+  margin-left:  calc(-1 * var(--spacing-16));
+  margin-right: calc(-1 * var(--spacing-16));
+  height: 336px; /* lock mobile hero carousel height to prevent layout shift */
+}
+
+.comms-carousel__track {
+  display: flex;
+  gap: var(--c-gap);
+  align-items: center; /* vertically center shorter side cards */
+  will-change: transform;
+  /* Initial offset positions card[1] (center) correctly on mobile.
+     JS overrides this value on every init / resize.             */
+  transform: translateX(calc(3 * var(--c-peek) + 2 * var(--c-gap) - 100vw));
+}
+
+/* Side cards — Figma 316×268 ratio */
+.comms-card {
+  flex-shrink: 0;
+  width: var(--card-w, calc(100vw - 2 * var(--c-peek) - 2 * var(--c-gap)));
+  height: 300px;
+  border-radius: var(--spacing-24);
+  overflow: hidden;
+  position: relative;
+  transition: height 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Center card — Figma 316×336 ratio, capped at 336px on mobile */
+.comms-card.is-center {
+  height: 336px;
+}
+
+.comms-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comms-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: var(--spacing-24);
+  background: linear-gradient(185.8deg, rgba(0,0,0,0) 15.6%, rgba(0,0,0,0.8) 70.5%);
+}
+
+/* Text content — only visible on the center card */
+.comms-card__content {
+  position: absolute;
+  z-index: 2;
+  bottom: var(--spacing-24);
+  left: var(--spacing-16);
+  right: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s ease-out;
+}
+
+.comms-card.is-center .comms-card__content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.comms-card__text {
+  color: var(--text-invert);
+}
+
+.comms-card__text--lg {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-26);
+  text-shadow: var(--shadow-text);
+}
+
+.comms-card__arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text-invert);
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex-shrink: 0;
+}
+
+.comms-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  margin-top: -8px;
+}
+
+.comms-carousel__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.comms-carousel__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.comms-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #c8cad5;
+  border: none;
+  padding: 0;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.comms-carousel__dot.is-active {
+  width: 24px;
+  background: var(--text-secondary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. QUICK LINKS
+   Mobile:  horizontally scrollable pill track, nav hidden
+   Desktop: static row, nav arrows visible
+   ───────────────────────────────────────────────────────────── */
+.quick-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  position: relative;
+  margin-left:  calc(-1 * var(--spacing-16));
+  margin-right: calc(-1 * var(--spacing-16));
+}
+
+.quick-links__nav {
+  display: none;
+  flex-shrink: 0;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.quick-links__nav img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.quick-links__track {
+  display: flex;
+  gap: var(--spacing-16);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex: 1;
+  padding: var(--spacing-4) 0;
+}
+
+.quick-links__track::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  background: var(--surface-secondary);
+  padding: 0 var(--spacing-12);
+  border-radius: var(--spacing-40);
+  height: 44px; /* Figma spec */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  white-space: nowrap;
+}
+
+.quick-link__icon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
+}
+
+.quick-link__label {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-16);
+  color: var(--text-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. SECTION SHARED
+   ───────────────────────────────────────────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.section__title {
+  font-family: var(--font-family-m);
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-34);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* Shared carousel nav arrow (desktop side buttons) */
+.carousel-nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.carousel-nav img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Chevron pair shown below carousels on mobile/tablet */
+.carousel-chevrons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+}
+
+.carousel-chevron-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. APPS SECTION
+   Mobile:  horizontally scrollable
+   Desktop: spread full-width with nav arrows
+   ───────────────────────────────────────────────────────────── */
+.app-carousel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  margin-left:  calc(-1 * var(--spacing-16));
+  margin-right: calc(-1 * var(--spacing-16));
+}
+
+.app-carousel__track {
+  display: flex;
+  gap: var(--spacing-16);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex: 1;
+  padding: var(--spacing-8) 0;
+}
+
+.app-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.app-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  background: var(--surface-secondary);
+  border-radius: var(--spacing-32);
+  padding: var(--spacing-24);
+  width: 140px;
+  height: 146px; /* Figma component spec */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.app-card__icon-wrap {
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-card__icon {
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  object-fit: contain;
+}
+
+.app-card__name {
+  font-family: var(--font-family-l);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-16);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. DISCOVER SECTION
+   Mobile:  horizontally scrollable, single card scroll
+   Desktop: three cards side-by-side
+   ───────────────────────────────────────────────────────────── */
+.discover-carousel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  margin-left:  calc(-1 * var(--spacing-16));
+  margin-right: calc(-1 * var(--spacing-16));
+}
+
+.discover-carousel__track {
+  display: flex;
+  gap: var(--spacing-40);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* padding lets the first & last cards scroll to center */
+  padding-inline: calc(50% - 136px); /* 136 = half of 272px card width */
+  scroll-padding-inline: calc(50% - 136px);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.discover-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.discover-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 272px; /* Figma mobile card width */
+}
+
+.discover-card__img {
+  width: 100%;
+  height: 340px; /* Figma portrait image height on mobile */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: var(--spacing-24);
+}
+
+.discover-card__label {
+  font-family: var(--font-family-3xl);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-20);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* Mobile-only: stack discover cards vertically */
+@media (max-width: 767.98px) {
+  .discover-carousel {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .discover-carousel__track {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-40);
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+
+  .discover-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-24);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .discover-card__img {
+    width: 100%;
+    height: 240px;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: center 34%;
+  }
+
+  .discover-carousel__track .discover-card:nth-child(1) .discover-card__img {
+    object-position: center 38%;
+  }
+
+  .discover-carousel__track .discover-card:nth-child(2) .discover-card__img {
+    object-position: center 24%;
+  }
+
+  .discover-carousel__track .discover-card:nth-child(3) .discover-card__img {
+    object-position: center 34%;
+  }
+
+  .discover-chevrons {
+    display: none;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. IT HELP CTA CARD
+   Desktop Figma node 1842:739:
+   1568x364, radius 40, padding 80, 24 gap
+   Gradient: 187.566deg, #073bb1 39.797% → #091f3f 71.443%
+   ───────────────────────────────────────────────────────────── */
+.cta-card {
+  border-radius: var(--spacing-24);
+  overflow: hidden;
+  background:
+    radial-gradient(110% 85% at 50% 100%, rgba(2, 15, 39, 0.42) 0%, rgba(2, 15, 39, 0) 56%),
+    linear-gradient(180deg, #07339c 0%, #0b2a66 56%, var(--brand-fiu-blue) 100%);
+}
+
+.cta-card__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-24);
+  padding: var(--spacing-40) var(--spacing-24);
+  text-align: center;
+}
+
+.cta-card__title {
+  font-family: var(--font-family-3xl);
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-34);
+  color: var(--text-invert);
+}
+
+.cta-card__body {
+  font-family: var(--font-family-3xl);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--spacing-20);
+  color: var(--text-invert);
+}
+
+
+/* =============================================================
+   RESPONSIVE — Tablet  ≥ 768px
+   ============================================================= */
+@media (min-width: 768px) {
+  /* ── Page layout ── */
+  .main-content {
+    padding: var(--spacing-32) var(--spacing-40);
+    padding-top: 80px;
+    gap: var(--spacing-48);
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    padding: var(--spacing-20) var(--spacing-40);
+    gap: var(--spacing-8);
+  }
+
+  .navbar-search {
+    top: var(--spacing-16);
+    width: min(560px, calc(100vw - 280px));
+    height: 56px;
+  }
+
+  .search-results {
+    width: min(620px, calc(100vw - 280px));
+  }
+
+  .page.search-active .navbar {
+    padding: var(--spacing-20) var(--spacing-40);
+  }
+
+  .page.search-active .navbar-search {
+    top: var(--spacing-16);
+    width: min(560px, calc(100vw - 270px));
+  }
+
+  /* Tablet should mirror mobile nav controls */
+  .persona-pill {
+    display: inline-flex;
+  }
+
+  .persona-switcher {
+    display: none;
+  }
+
+  /* Keep navbar text at 16px on tablet/desktop */
+  .persona-switcher__item {
+    font-size: var(--font-size-16);
+    line-height: var(--spacing-18);
+  }
+
+  /* Keep emphasis button dark navy with 16px label */
+  .navbar .btn--emphasis {
+    background: var(--button-primary);
+    font-size: var(--font-size-16);
+    line-height: var(--spacing-18);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    gap: var(--spacing-32);
+  }
+
+  /* Match tablet alert width to the main center highlight card */
+  .alert-banner {
+    width: var(--card-w, calc(100% - (2 * var(--c-peek)) - (2 * var(--c-gap))));
+    margin-inline: auto;
+  }
+
+  /* ── Comms carousel — no bleed at tablet, JS recalculates --card-w ── */
+  .comms-carousel {
+    margin-left:  calc(-1 * var(--spacing-40));
+    margin-right: calc(-1 * var(--spacing-40));
+    height: 344px; /* lock tablet carousel height */
+  }
+
+  /* Keep fixed carousel heights on tablet (matches Figma) */
+  .comms-card {
+    height: 308px;
+    aspect-ratio: auto;
+  }
+
+  .comms-card.is-center {
+    height: 344px;
+    aspect-ratio: auto;
+  }
+
+  .comms-card__content {
+    left: var(--spacing-24);
+    right: var(--spacing-24);
+  }
+
+  /* ── App cards ── */
+  .app-card {
+    width: 180px;
+  }
+
+  .app-card__name {
+    font-size: var(--font-size-18);
+    line-height: var(--spacing-20);
+  }
+
+  .app-carousel {
+    margin-left:  calc(-1 * var(--spacing-40));
+    margin-right: calc(-1 * var(--spacing-40));
+  }
+
+  /* ── Discover cards ── */
+  .discover-card {
+    width: 224px;
+    gap: var(--spacing-24);
+  }
+
+  .discover-carousel__track {
+    padding-inline: calc(50% - 112px); /* 112 = half of 224px card width */
+    scroll-padding-inline: calc(50% - 112px);
+  }
+
+  .discover-carousel {
+    margin-left:  calc(-1 * var(--spacing-40));
+    margin-right: calc(-1 * var(--spacing-40));
+  }
+
+  .discover-card__img {
+    height: 328px;
+  }
+
+  .discover-card__label {
+    font-size: var(--font-size-24);
+    line-height: var(--spacing-26);
+  }
+
+  /* Keep quick links centered on tablet */
+  .quick-links {
+    margin-left:  calc(-1 * var(--spacing-40));
+    margin-right: calc(-1 * var(--spacing-40));
+    justify-content: center;
+  }
+
+  .quick-links__track {
+    justify-content: center;
+  }
+
+  .quick-link {
+    width: 180px;
+    height: 40px;
+    padding: 0 var(--spacing-16);
+    gap: var(--spacing-4);
+  }
+
+  /* ── Section gaps ── */
+  .section {
+    gap: var(--spacing-32);
+  }
+
+  /* ── CTA card ── */
+  .cta-card {
+    border-radius: var(--spacing-32);
+  }
+
+  .cta-card__inner {
+    padding: var(--spacing-64) var(--spacing-40);
+  }
+
+  .cta-card__body {
+    font-size: var(--font-size-24);
+    line-height: var(--spacing-26);
+  }
+}
+
+
+/* =============================================================
+   RESPONSIVE — Desktop  ≥ 1280px
+   ============================================================= */
+@media (min-width: 1280px) {
+  :root {
+    --c-peek: 40px;
+    --c-gap: 40px;
+  }
+
+  /* ── Page layout ── */
+  .main-content {
+    max-width: 1568px;
+    margin-inline: auto;
+    padding: var(--spacing-40) var(--spacing-80) var(--spacing-80);
+    padding-top: 96px;
+    gap: var(--spacing-64);
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    flex-wrap: nowrap;
+    padding: var(--spacing-40) var(--spacing-80) var(--spacing-8);
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  /* Desktop uses full persona switcher, not mobile pill */
+  .persona-pill {
+    display: none;
+  }
+
+  .persona-switcher {
+    display: flex;
+  }
+
+  .persona-sheet,
+  .persona-sheet-backdrop {
+    display: none !important;
+  }
+
+  .navbar-search {
+    top: var(--spacing-40);
+    width: 651px;
+    height: 52px;
+  }
+
+  .search-results {
+    width: min(651px, calc(100vw - 560px));
+  }
+
+  .page.search-active .navbar-search {
+    top: 38px;
+    width: min(651px, calc(100vw - 620px));
+    max-width: 651px;
+    z-index: 101;
+  }
+
+  /* Desktop: persona absolutely centered below navbar top edge */
+  .persona-switcher {
+    position: absolute;
+    left: 50%;
+    top: var(--spacing-40);
+    transform: translateX(-50%);
+    overflow: visible;
+    flex-shrink: 0;
+  }
+
+  .persona-switcher__item {
+    border-radius: var(--spacing-48);
+  }
+
+  .persona-switcher__item--active {
+    border-radius: var(--spacing-16);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    align-items: center;
+    gap: var(--spacing-40);
+  }
+
+  .alert-banner {
+    width: 100%;
+    max-width: 920px;
+  }
+
+  /* ── Comms carousel — no bleed at desktop, JS recalculates --card-w ── */
+  .comms-carousel {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: 400px;
+  }
+
+  /* Keep fixed heights at desktop to avoid oversized carousel cards */
+  .comms-card {
+    height: 360px;
+    aspect-ratio: auto;
+    transition: height 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .comms-card.is-center {
+    height: 400px;
+    aspect-ratio: auto;
+  }
+
+  .comms-card__text--lg {
+    font-size: var(--font-size-32);
+    line-height: var(--spacing-34);
+  }
+
+  .comms-card__content {
+    left: var(--spacing-24);
+    right: var(--spacing-24);
+  }
+
+  /* Hide chevron pairs at desktop — side nav buttons take over */
+  .carousel-chevrons {
+    display: none;
+  }
+
+  /* ── Quick links ── */
+  .quick-links {
+    width: auto;
+    margin-left:  calc(-1 * var(--spacing-80));
+    margin-right: calc(-1 * var(--spacing-80));
+    padding-inline: 0;
+    justify-content: space-between;
+    gap: var(--spacing-16);
+  }
+
+  .quick-links__nav {
+    display: none;
+  }
+
+  .quick-links__track {
+    overflow: visible;
+    scroll-snap-type: none;
+    flex: 1;
+    gap: var(--spacing-40);
+    justify-content: center;
+  }
+
+  /* ── Section shared ── */
+  .section {
+    gap: var(--spacing-40);
+  }
+
+  /* ── App carousel ── */
+  .carousel-nav {
+    display: flex;
+  }
+
+  .app-carousel__track {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: none;
+    justify-content: flex-start;
+    gap: var(--spacing-40);
+  }
+
+  .app-carousel {
+    margin-left:  calc(-1 * var(--spacing-80));
+    margin-right: calc(-1 * var(--spacing-80));
+  }
+
+  .app-card {
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  /* ── Discover section ── */
+  .discover-carousel__track {
+    overflow: visible;
+    scroll-snap-type: none;
+    gap: var(--spacing-80);
+    justify-content: center;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    width: max-content;
+    margin-inline: auto;
+  }
+
+  .discover-carousel {
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .discover-carousel .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .discover-carousel .carousel-nav--prev {
+    left: 0;
+  }
+
+  .discover-carousel .carousel-nav--next {
+    right: 0;
+  }
+
+  .discover-card {
+    width: 304px;
+    min-width: 304px;
+    flex: 0 0 304px;
+    max-width: 304px;
+    gap: var(--spacing-40);
+  }
+
+  .discover-card__img {
+    height: 432px;
+  }
+
+  /* ── CTA card ── */
+  .cta-card {
+    border-radius: var(--spacing-40);
+  }
+
+  .cta-card__inner {
+    padding: var(--spacing-80);
+    min-height: 364px;
+  }
+
+  .cta-card__title {
+    font-size: var(--font-size-40);
+    line-height: var(--line-height-40);
+  }
+
+  .cta-card__body {
+    font-size: var(--font-size-24);
+    line-height: var(--spacing-26);
+  }
+
+  .cta-card__inner > .btn--teritiary {
+    width: 334px;
+    max-width: 100%;
+    min-height: 44px;
+    font-size: var(--font-size-18);
+    line-height: var(--spacing-20);
+  }
+}

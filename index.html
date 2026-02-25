@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyFIU</title>
+  <!--
+    Font: "Proxima Nova" (commercial licence required).
+    Obtain via Adobe Fonts, Typekit, or a licensed CDN and replace
+    this comment with your @font-face / <link> declaration.
+    The system-ui fallback stack in styles.css handles absence gracefully.
+  -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════
+       NAVBAR
+       ─ Logo (left)
+       ─ Persona switcher (centered, overlaid at desktop)
+       ─ Search + Log In (right)
+  ═══════════════════════════════════════════════════ -->
+  <header class="navbar" role="banner">
+
+    <a href="#main" class="navbar__logo" aria-label="MyFIU Home">
+      <svg class="navbar__logo-img" width="81" height="32" viewBox="0 0 81 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MyFIU" role="img">
+        <g clip-path="url(#clip0_29752_583)">
+          <path d="M2.8173 12H0.958282V2.66666H2.8173L6.0573 7.18666L9.35044 2.66666H11.1431V12H9.28405V5.70666L6.85405 9.29332H5.30041L2.8173 5.70666V12ZM17.3068 12H15.4611V8.47999L12.2078 6.14666V2.66666H14.0668V5.35999L16.364 6.93332L18.7011 5.35999V2.66666H20.5468V6.14666L17.3068 8.47999V12Z" fill="#B7872D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M23.9016 6.33442V10.0023L24.7843 9.96841L25.667 9.93463L25.6667 16.0261L25.6665 22.1176H24.7841H23.9016V25.7255V29.3333H29.6634H35.4251V25.7778V22.2222H34.5946H33.7641V21.0719V19.9216H36.6709H39.5777V16.4183V12.915L36.645 12.9152L33.7122 12.9153L33.7434 11.3989L33.7748 9.88234H35.3785H36.9824V10.7189V11.5555H40.9792H44.9761V7.1111V2.66666H34.4389H23.9016V6.33442ZM45.8067 6.2745V9.88234H46.741H47.6753V15.9959V22.1095L46.7669 22.1397L45.8586 22.1699L45.8313 25.7516L45.804 29.3333H51.6203H57.4367L57.4093 25.7516L57.382 22.1699H56.5254H55.6688L55.6689 16.0261L55.6691 9.88234H56.5515H57.434V6.2745V2.66666H51.6203H45.8067V6.2745ZM58.2645 6.2745V9.88234H59.095H59.9255L59.9281 17.0196L59.9307 24.1569L62.3784 26.7451L64.8261 29.3333H69.6356H74.4449L76.8364 26.7974L79.2278 24.2614L79.2315 17.0719L79.2351 9.88234H80.1176H81V6.2745V2.66666H75.4978H69.9956V6.2745V9.88234H70.6185H71.2414V16.0523V22.2222H69.6322H68.0231V16.0523V9.88234H68.5941H69.1651V6.2745V2.66666H63.7148H58.2645V6.2745ZM24.7322 6.2745V9.04574H25.6665H26.6008V16.0523V23.0588H25.6665H24.7322V25.7778V28.4967H29.6115H34.4908V25.7778V23.0588H33.6603H32.8297V21.0196V18.9804H35.7366H38.6434L38.6435 16.3921V13.8039L35.7367 13.8332L32.8297 13.8626V11.4541V9.04574H35.3732H37.9167V9.88234V10.7189H40.9792H44.0418V7.1111V3.50326H34.387H24.7322V6.2745ZM46.741 6.2745V9.04574H47.6234H48.5058V16.0523V23.0588H47.6234H46.741V25.7778V28.4967H51.6203H56.4996V25.7778V23.0588H55.6172H54.7348V16.0523V9.04574H55.6172H56.4996V6.2745V3.50326H51.6203H46.741V6.2745ZM59.095 6.2745V9.04574H59.9774H60.8599L60.8613 16.3921L60.8628 23.7386L63.1088 26.1176L65.3547 28.4967H69.6279H73.9009L76.1497 26.1176L78.3984 23.7386L78.4015 16.3921L78.4046 9.04574H79.2871H80.1695V6.2745V3.50326H75.6016H71.0337V6.2745V9.04574H71.6047H72.1757L72.1724 15.7647L72.1692 22.4837L71.9178 22.7712L71.6666 23.0588H69.6322H67.5979L67.3466 22.7712L67.0953 22.4837L67.0921 15.7647L67.0888 9.04574H67.6078H68.1269V6.2745V3.50326H63.611H59.095V6.2745Z" fill="#B7872D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M24.738 6.28085V9.05205H25.6724H26.6067V16.0585V23.0649H25.6724H24.738V25.7838V28.5027H29.6173H34.4966V25.7838V23.0649H33.6661H32.8356V21.0257V18.9865H35.7424H38.6492L38.6493 16.3983V13.8101L35.7425 13.8394L32.8356 13.8688V11.4604V9.05205H35.3791H37.9225V9.88864V10.7252H40.9851H44.0476V7.11743V3.50964H34.3928H24.738V6.28085ZM46.7468 6.28085V9.05205H47.6292H48.5116V16.0585V23.0649H47.6292H46.7468V25.7838V28.5027H51.6261H56.5054V25.7838V23.0649H55.6229H54.7405V16.0585V9.05205H55.6229H56.5054V6.28085V3.50964H51.6261H46.7468V6.28085ZM59.1007 6.28085V9.05205H59.9832H60.8656L60.867 16.3983L60.8685 23.7446L63.1145 26.1237L65.3605 28.5027H69.6336H73.9066L76.1553 26.1237L78.4041 23.7446L78.4072 16.3983L78.4103 9.05205H79.2927H80.1752V6.28085V3.50964H75.6073H71.0394V6.28085V9.05205H71.6104H72.1814L72.1781 15.7709L72.1749 22.4898L71.9235 22.7773L71.6723 23.0649H69.6379H67.6036L67.3524 22.7773L67.101 22.4898L67.0978 15.7709L67.0945 9.05205H67.6136H68.1326V6.28085V3.50964H63.6167H59.1007V6.28085Z" fill="#091F3F"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_29752_583">
+            <rect width="81" height="32" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </a>
+
+    <!-- Mobile only: single-pill role selector with dropdown chevron -->
+    <!-- Figma: "Selection filters" · node 1446:627 · 390px frame     -->
+    <button class="persona-pill" aria-label="Select persona" aria-haspopup="dialog" aria-expanded="false" aria-controls="persona-sheet">
+      <span class="persona-pill__label">Student</span>
+      <svg class="persona-pill__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M7.64663 10.8539C7.74039 10.9474 7.86749 11 8 11C8.13251 11 8.25961 10.9474 8.35337 10.8539L12.3538 6.85625C12.4474 6.76255 12.5 6.63554 12.5 6.50312C12.5 6.3707 12.4474 6.24369 12.3538 6.15L3.64624 6.15C3.5526 6.24369 3.5 6.3707 3.5 6.50312C3.5 6.63554 3.5526 6.76255 3.64624 6.85625L7.64663 10.8539Z" fill="#091F3F"/>
+      </svg>
+    </button>
+
+    <!-- Tablet + Desktop: full tab strip, centered -->
+    <nav class="persona-switcher" aria-label="Select persona">
+      <button class="persona-switcher__item persona-switcher__item--active" aria-pressed="true">Student</button>
+      <button class="persona-switcher__item" aria-pressed="false">Faculty</button>
+      <button class="persona-switcher__item" aria-pressed="false">Staff</button>
+      <button class="persona-switcher__item" aria-pressed="false">Applicant</button>
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="navbar__search-btn" aria-label="Open search" aria-expanded="false" aria-controls="search-results-panel">
+        <img class="navbar__search-icon" src="public/assets/icons/search-icon.svg" alt="" width="24" height="24" aria-hidden="true">
+      </button>
+      <a class="btn btn--emphasis" href="https://login.fiu.edu/">Log In</a>
+    </div>
+
+    <form class="navbar-search" role="search" aria-label="Quick link search">
+      <img class="navbar-search__icon" src="public/assets/icons/search-icon.svg" alt="" width="24" height="24" aria-hidden="true">
+      <input class="navbar-search__input" type="search" placeholder="Search quick links" autocomplete="off">
+      <button class="navbar-search__clear" type="button" aria-label="Clear search">
+        <img src="public/assets/icons/icon-x-search.svg" alt="" width="24" height="24" aria-hidden="true">
+      </button>
+    </form>
+
+  </header>
+
+  <div class="persona-sheet-backdrop" hidden></div>
+  <section class="persona-sheet" id="persona-sheet" role="dialog" aria-modal="true" aria-label="Select role" hidden>
+    <div class="persona-sheet__panel">
+      <button class="persona-sheet__option is-selected" type="button" data-role="Student">
+        <span>Student</span>
+        <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="persona-sheet__option" type="button" data-role="Faculty">
+        <span>Faculty</span>
+        <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="persona-sheet__option" type="button" data-role="Staff">
+        <span>Staff</span>
+        <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="persona-sheet__option" type="button" data-role="Alumni">
+        <span>Alumni</span>
+        <svg class="persona-sheet__check" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.6 17L19 7.5" stroke="#091F3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button class="persona-sheet__close" type="button">Close</button>
+    </div>
+  </section>
+
+  <section class="search-results" id="search-results-panel" aria-live="polite" hidden>
+    <ul class="search-results__list" role="list"></ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════ -->
+  <main class="main-content" id="main">
+
+
+    <!-- ───────────────────────────────────────────
+         HERO SECTION
+         1. Alert banner
+         2. Communications carousel
+         3. Quick links
+    ─────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero">
+
+      <!-- Alert Banner -->
+      <div class="alert-banner" role="alert" aria-live="polite">
+        <div class="alert-banner__body">
+          <span class="alert-banner__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.1818 2H3.81818C2.81364 2 2 2.81364 2 3.81818V20.1818C2 21.1864 2.81364 22 3.81818 22H20.1818C21.1864 22 22 21.1864 22 20.1818V3.81818C22 2.81364 21.1864 2 20.1818 2ZM8.14273 15.8573L6.21455 17.7855C4.73364 16.3045 3.81818 14.2591 3.81818 12C3.81818 9.74091 4.73364 7.69545 6.21455 6.21455L8.14273 8.14273C7.15636 9.13 6.54545 10.4936 6.54545 12C6.54545 13.5064 7.15636 14.87 8.14273 15.8573ZM12 13.8182C10.9955 13.8182 10.1818 13.0045 10.1818 12C10.1818 10.9955 10.9955 10.1818 12 10.1818C13.0045 10.1818 13.8182 10.9955 13.8182 12C13.8182 13.0045 13.0045 13.8182 12 13.8182ZM17.7855 17.7855L15.8573 15.8573C16.8436 14.87 17.4545 13.5064 17.4545 12C17.4545 10.4936 16.8436 9.13 15.8573 8.14273L17.7855 6.21455C19.2664 7.69545 20.1818 9.74091 20.1818 12C20.1818 14.2591 19.2664 16.3045 17.7855 17.7855Z" fill="#FD9738"/>
+            </svg>
+          </span>
+          <div class="alert-banner__text">
+            <p class="alert-banner__title">Service Alert</p>
+            <p class="alert-banner__desc">
+              Some FIU systems may experience limited availability or intermittent
+              issues during the scheduled maintenance window from 10 PM–2 AM.
+            </p>
+          </div>
+        </div>
+        <button class="alert-banner__cta" aria-label="View service alert details">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M11.9231 7L17 12L11.9231 17M16.2949 12H6" stroke="#FD9738" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+
+      <!-- Communications Carousel -->
+      <div class="comms-carousel" aria-label="Campus communications">
+        <div class="comms-carousel__track" role="list">
+
+          <!-- Card 1 — left peek -->
+          <article class="comms-card" role="listitem">
+            <img class="comms-card__img" src="https://www.figma.com/api/mcp/asset/21cb7e08-e5f2-4d18-a6ee-a41af6926991" alt="Use AI tools to empower your day">
+            <div class="comms-card__overlay" aria-hidden="true"></div>
+            <div class="comms-card__content">
+              <p class="comms-card__text comms-card__text--lg">Read about how to use AI Tools to empower your day-to-day life.</p>
+              <span class="comms-card__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.46154 3L14 8.5L8.46154 14M13.2308 8.5H2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 2 — center -->
+          <article class="comms-card is-center" role="listitem">
+            <img class="comms-card__img" src="https://www.figma.com/api/mcp/asset/22027cc9-8edf-49fe-9ca0-3ff74a87212a" alt="#BeCyberSecure campaign">
+            <div class="comms-card__overlay" aria-hidden="true"></div>
+            <div class="comms-card__content">
+              <p class="comms-card__text comms-card__text--lg">We're calling on you Panthers to take action and #BeCyberSecure!</p>
+              <span class="comms-card__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.46154 3L14 8.5L8.46154 14M13.2308 8.5H2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 3 — right peek -->
+          <article class="comms-card" role="listitem">
+            <img class="comms-card__img" src="https://www.figma.com/api/mcp/asset/4af50402-32e6-4e68-ae4f-aa0696340eb5" alt="FIU Mobile app">
+            <div class="comms-card__overlay" aria-hidden="true"></div>
+            <div class="comms-card__content">
+              <p class="comms-card__text comms-card__text--lg">FIU Mobile gives you everything you need for campus life.</p>
+              <span class="comms-card__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.46154 3L14 8.5L8.46154 14M13.2308 8.5H2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="comms-carousel__controls" aria-label="Carousel controls">
+        <div class="comms-carousel__dots" aria-label="Communication pagination"></div>
+      </div>
+
+
+      <!-- Quick Links -->
+      <nav class="quick-links" aria-label="Quick links">
+
+        <button class="quick-links__nav quick-links__nav--prev" aria-label="Scroll quick links left">
+          <img src="public/assets/icons/icon-left-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+        <div class="quick-links__track" role="list">
+          <a href="#" class="quick-link" role="listitem" data-search-title="View Classes" data-search-subtext="Browse your schedule and registered courses">
+            <svg class="quick-link__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 22H21V20H6.012C5.55 19.988 5 19.805 5 19C5 18.195 5.55 18.012 6.012 18H21V4C21 2.897 20.103 2 19 2H6C4.794 2 3 2.799 3 5V19C3 21.201 4.794 22 6 22ZM5 8V5C5 4.195 5.55 4.012 6 4H19V16H5V8Z" fill="#354ED4"/>
+              <path d="M8 6H17V8H8V6Z" fill="#354ED4"/>
+            </svg>
+            <span class="quick-link__label">View Classes</span>
+          </a>
+          <a href="#" class="quick-link" role="listitem" data-search-title="Degree Audit" data-search-subtext="Panther Degree Audit">
+            <svg class="quick-link__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M9.783 3.50002C10.4758 3.17116 11.2331 3.00055 12 3.00055C12.7669 3.00055 13.5242 3.17116 14.217 3.50002L20.908 6.63702C22.364 7.31902 22.364 9.68102 20.908 10.363L14.218 13.5C13.5251 13.829 12.7676 13.9997 12.0005 13.9997C11.2334 13.9997 10.4759 13.829 9.783 13.5L3.092 10.363C1.636 9.68102 1.636 7.31902 3.092 6.63702L6 5.27302M2 8.50002V14M12 21C10.204 21 7.854 19.879 6.385 19.066C5.504 18.577 5 17.633 5 16.626V11.5M19 11.5V16.625C19 17.633 18.497 18.577 17.615 19.065C17.0055 19.4037 16.3816 19.7157 15.745 20" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="quick-link__label">Degree Audit</span>
+          </a>
+          <a href="#" class="quick-link" role="listitem" data-search-title="Academic Advising" data-search-subtext="Meet with advising and plan your academic path">
+            <svg class="quick-link__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4.8 11.7L2.3 9.2C2.1 9 2 8.76667 2 8.5C2 8.23333 2.1 8 2.3 7.8L4.8 5.3C5 5.1 5.23333 5 5.5 5C5.76667 5 6 5.1 6.2 5.3L8.7 7.8C8.9 8 9 8.23333 9 8.5C9 8.76667 8.9 9 8.7 9.2L6.2 11.7C6 11.9 5.76667 12 5.5 12C5.23333 12 5 11.9 4.8 11.7ZM10 22C9.71667 22 9.47933 21.904 9.288 21.712C9.09667 21.52 9.00067 21.2827 9 21V17C8.16667 16.9333 7.34167 16.8417 6.525 16.725C5.70833 16.6083 4.89167 16.4583 4.075 16.275C3.79167 16.2083 3.56267 16.05 3.388 15.8C3.21333 15.55 3.16733 15.2833 3.25 15C3.33267 14.7167 3.50367 14.5083 3.763 14.375C4.02233 14.2417 4.293 14.2083 4.575 14.275C5.79167 14.5583 7.021 14.75 8.263 14.85C9.505 14.95 10.7507 15 12 15C13.2493 15 14.4953 14.95 15.738 14.85C16.9807 14.75 18.2097 14.5583 19.425 14.275C19.7083 14.2083 19.9793 14.2417 20.238 14.375C20.4967 14.5083 20.6673 14.7167 20.75 15C20.8327 15.2833 20.787 15.55 20.613 15.8C20.439 16.05 20.2097 16.2083 19.925 16.275C19.1083 16.4583 18.2917 16.6083 17.475 16.725C16.6583 16.8417 15.8333 16.9333 15 17V21C15 21.2833 14.9043 21.521 14.713 21.713C14.5217 21.905 14.284 22.0007 14 22H10ZM5.5 9.6L6.6 8.5L5.5 7.4L4.4 8.5L5.5 9.6ZM12 7C11.1667 7 10.4583 6.70833 9.875 6.125C9.29167 5.54167 9 4.83333 9 4C9 3.16667 9.29167 2.45833 9.875 1.875C10.4583 1.29167 11.1667 1 12 1C12.8333 1 13.5417 1.29167 14.125 1.875C14.7083 2.45833 15 3.16667 15 4C15 4.83333 14.7083 5.54167 14.125 6.125C13.5417 6.70833 12.8333 7 12 7ZM12 14C11.45 14 10.9793 13.8043 10.588 13.413C10.1967 13.0217 10.0007 12.5507 10 12C9.99933 11.4493 10.1953 10.9787 10.588 10.588C10.9807 10.1973 11.4513 10.0013 12 10C12.5487 9.99867 13.0197 10.1947 13.413 10.588C13.8063 10.9813 14.002 11.452 14 12C13.998 12.548 13.8023 13.019 13.413 13.413C13.0237 13.807 12.5527 14.0027 12 14ZM12 5C12.2833 5 12.521 4.904 12.713 4.712C12.905 4.52 13.0007 4.28267 13 4C12.9993 3.71733 12.9033 3.48 12.712 3.288C12.5207 3.096 12.2833 3 12 3C11.7167 3 11.4793 3.096 11.288 3.288C11.0967 3.48 11.0007 3.71733 11 4C10.9993 4.28267 11.0953 4.52033 11.288 4.713C11.4807 4.90567 11.718 5.00133 12 5ZM16.775 11.5L15.625 9.5C15.5417 9.35 15.5 9.18333 15.5 9C15.5 8.81667 15.5417 8.65 15.625 8.5L16.775 6.5C16.8583 6.33333 16.975 6.20833 17.125 6.125C17.275 6.04167 17.4417 6 17.625 6H19.875C20.0583 6 20.225 6.04167 20.375 6.125C20.525 6.20833 20.6417 6.33333 20.725 6.5L21.875 8.5C21.9583 8.65 22 8.81667 22 9C22 9.18333 21.9583 9.35 21.875 9.5L20.725 11.5C20.6417 11.6667 20.525 11.7917 20.375 11.875C20.225 11.9583 20.0583 12 19.875 12H17.625C17.4417 12 17.275 11.9583 17.125 11.875C16.975 11.7917 16.8583 11.6667 16.775 11.5ZM18.2 10H19.3L19.85 9L19.3 8H18.2L17.65 9L18.2 10Z" fill="#354ED4"/>
+            </svg>
+            <span class="quick-link__label">Academic Advising</span>
+          </a>
+          <a href="#" class="quick-link" role="listitem" data-search-title="Financial Aid" data-search-subtext="Manage aid awards, documents, and requirements">
+            <svg class="quick-link__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M11.1731 5.25H9.01923C8.52425 5.25 8.03411 5.35185 7.57681 5.54972C7.1195 5.7476 6.70399 6.03764 6.35398 6.40327C6.00398 6.7689 5.72634 7.20296 5.53692 7.68068C5.34749 8.1584 5.25 8.67042 5.25 9.1875C5.25 9.70458 5.34749 10.2166 5.53692 10.6943C5.72634 11.172 6.00398 11.6061 6.35398 11.9717C6.70399 12.3374 7.1195 12.6274 7.57681 12.8253C8.03411 13.0232 8.52425 13.125 9.01923 13.125H11.1731V16.5H6.32692V18.75H11.1731V21H13.3269V18.75H15.4808C16.4804 18.75 17.4392 18.3352 18.146 17.5967C18.8529 16.8583 19.25 15.8568 19.25 14.8125C19.25 13.7682 18.8529 12.7667 18.146 12.0283C17.4392 11.2898 16.4804 10.875 15.4808 10.875H13.3269V7.5H18.1731V5.25H13.3269V3H11.1731V5.25ZM13.3269 13.125H15.4808C15.9092 13.125 16.3201 13.3028 16.623 13.6193C16.926 13.9357 17.0962 14.3649 17.0962 14.8125C17.0962 15.2601 16.926 15.6893 16.623 16.0057C16.3201 16.3222 15.9092 16.5 15.4808 16.5H13.3269V13.125ZM11.1731 10.875H9.01923C8.8071 10.875 8.59704 10.8314 8.40105 10.7465C8.20506 10.6617 8.02698 10.5374 7.87698 10.3807C7.72698 10.224 7.60799 10.038 7.52681 9.83328C7.44563 9.62854 7.40385 9.40911 7.40385 9.1875C7.40385 8.96589 7.44563 8.74646 7.52681 8.54172C7.60799 8.33698 7.72698 8.15096 7.87698 7.99426C8.02698 7.83756 8.20506 7.71326 8.40105 7.62845C8.59704 7.54365 8.8071 7.5 9.01923 7.5H11.1731V10.875Z" fill="#354ED4"/>
+            </svg>
+            <span class="quick-link__label">Financial Aid</span>
+          </a>
+          <a href="#" class="quick-link" role="listitem" data-search-title="Financial Balance" data-search-subtext="Review account balances, charges, and payments">
+            <svg class="quick-link__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M11.1731 5.25H9.01923C8.52425 5.25 8.03411 5.35185 7.57681 5.54972C7.1195 5.7476 6.70399 6.03764 6.35398 6.40327C6.00398 6.7689 5.72634 7.20296 5.53692 7.68068C5.34749 8.1584 5.25 8.67042 5.25 9.1875C5.25 9.70458 5.34749 10.2166 5.53692 10.6943C5.72634 11.172 6.00398 11.6061 6.35398 11.9717C6.70399 12.3374 7.1195 12.6274 7.57681 12.8253C8.03411 13.0232 8.52425 13.125 9.01923 13.125H11.1731V16.5H6.32692V18.75H11.1731V21H13.3269V18.75H15.4808C16.4804 18.75 17.4392 18.3352 18.146 17.5967C18.8529 16.8583 19.25 15.8568 19.25 14.8125C19.25 13.7682 18.8529 12.7667 18.146 12.0283C17.4392 11.2898 16.4804 10.875 15.4808 10.875H13.3269V7.5H18.1731V5.25H13.3269V3H11.1731V5.25ZM13.3269 13.125H15.4808C15.9092 13.125 16.3201 13.3028 16.623 13.6193C16.926 13.9357 17.0962 14.3649 17.0962 14.8125C17.0962 15.2601 16.926 15.6893 16.623 16.0057C16.3201 16.3222 15.9092 16.5 15.4808 16.5H13.3269V13.125ZM11.1731 10.875H9.01923C8.8071 10.875 8.59704 10.8314 8.40105 10.7465C8.20506 10.6617 8.02698 10.5374 7.87698 10.3807C7.72698 10.224 7.60799 10.038 7.52681 9.83328C7.44563 9.62854 7.40385 9.40911 7.40385 9.1875C7.40385 8.96589 7.44563 8.74646 7.52681 8.54172C7.60799 8.33698 7.72698 8.15096 7.87698 7.99426C8.02698 7.83756 8.20506 7.71326 8.40105 7.62845C8.59704 7.54365 8.8071 7.5 9.01923 7.5H11.1731V10.875Z" fill="#354ED4"/>
+            </svg>
+            <span class="quick-link__label">Financial Balance</span>
+          </a>
+        </div>
+
+        <button class="quick-links__nav quick-links__nav--next" aria-label="Scroll quick links right">
+          <img src="public/assets/icons/icon-right-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+      </nav>
+
+      <!-- Quick links carousel chevrons -->
+      <div class="carousel-chevrons quick-links-chevrons">
+        <button class="carousel-chevron-btn" aria-label="Scroll quick links left">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 5L9 12L16 19" stroke="#CFCFCF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="carousel-chevron-btn" aria-label="Scroll quick links right">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 19L16 12L9 5" stroke="#CFCFCF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ───────────────────────────────────────────
+         APPS SECTION
+    ─────────────────────────────────────────────── -->
+    <section class="section section--apps" aria-labelledby="apps-heading">
+      <h2 class="section__title" id="apps-heading">Apps</h2>
+
+      <div class="app-carousel" aria-label="Available apps">
+
+        <button class="carousel-nav carousel-nav--prev" aria-label="Scroll apps left">
+          <img src="public/assets/icons/icon-left-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+        <div class="app-carousel__track" role="list">
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <img
+                class="app-card__icon"
+                src="https://www.figma.com/api/mcp/asset/eb579333-0184-42e6-8379-a67f0aee1735"
+                alt="Canvas icon"
+                width="48"
+                height="48"
+              >
+            </div>
+            <p class="app-card__name">Canvas</p>
+          </article>
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <svg class="app-card__icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="FIU Mail icon" role="img">
+                <path d="M31.3232 8.50201L7.07523 23.872L4.99023 20.582V17.747C4.99023 16.715 5.51323 15.753 6.37923 15.191L20.4742 6.04501C22.6212 4.65201 25.3882 4.65101 27.5352 6.04401L31.3232 8.50201Z" fill="url(#fiu-mail-paint0)"/>
+                <path d="M27.3172 5.91101C27.3902 5.95401 27.4622 5.99901 27.5342 6.04601L38.5342 13.182L11.2592 30.47L7.07422 23.867L27.0912 11.154C28.9882 9.95001 29.0712 7.24101 27.3172 5.91101Z" fill="url(#fiu-mail-paint1)"/>
+                <path d="M27.3172 5.91101C27.3902 5.95401 27.4622 5.99901 27.5342 6.04601L38.5342 13.182L11.2592 30.47L7.07422 23.867L27.0912 11.154C28.9882 9.95001 29.0712 7.24101 27.3172 5.91101Z" fill="url(#fiu-mail-paint2)"/>
+                <path d="M22.1418 33.771L11.2598 30.47L34.3958 15.804C36.3448 14.569 36.3398 11.724 34.3868 10.496L34.2828 10.431L34.5828 10.617L41.6238 15.185C42.4898 15.747 43.0128 16.709 43.0128 17.741V20.485L22.1418 33.771Z" fill="url(#fiu-mail-paint3)"/>
+                <path d="M22.1418 33.771L11.2598 30.47L34.3958 15.804C36.3448 14.569 36.3398 11.724 34.3868 10.496L34.2828 10.431L34.5828 10.617L41.6238 15.185C42.4898 15.747 43.0128 16.709 43.0128 17.741V20.485L22.1418 33.771Z" fill="url(#fiu-mail-paint4)"/>
+                <path d="M27.5348 6.04499C25.3868 4.65199 22.6208 4.65199 20.4728 6.04599L6.37777 15.192C5.51177 15.754 4.98877 16.716 4.98877 17.748V17.887C5.02277 18.923 5.56777 19.878 6.44877 20.433L23.9748 31.482L41.5448 20.45C42.4578 19.877 43.0108 18.875 43.0108 17.798V20.486L43.0118 17.742C43.0118 16.71 42.4888 15.748 41.6228 15.186L27.5348 6.04499Z" fill="url(#fiu-mail-paint5)"/>
+                <path d="M20.8861 43H36.4091C40.0551 43 43.0111 40.044 43.0111 36.398V17.797C43.0111 18.874 42.4571 19.876 41.5451 20.449L18.4551 34.947C17.2091 35.729 16.4541 37.097 16.4541 38.567C16.4541 41.016 18.4381 43 20.8861 43Z" fill="url(#fiu-mail-paint6)"/>
+                <path d="M20.8861 43H36.4091C40.0551 43 43.0111 40.044 43.0111 36.398V17.797C43.0111 18.874 42.4571 19.876 41.5451 20.449L18.4551 34.947C17.2091 35.729 16.4541 37.097 16.4541 38.567C16.4541 41.016 18.4381 43 20.8861 43Z" fill="url(#fiu-mail-paint7)"/>
+                <path d="M20.8861 43H36.4091C40.0551 43 43.0111 40.044 43.0111 36.398V17.797C43.0111 18.874 42.4571 19.876 41.5451 20.449L18.4551 34.947C17.2091 35.729 16.4541 37.097 16.4541 38.567C16.4541 41.016 18.4381 43 20.8861 43Z" fill="url(#fiu-mail-paint8)"/>
+                <path d="M27.1978 42.999H11.5888C7.94282 42.999 4.98682 40.043 4.98682 36.397V17.783C4.98682 18.859 5.53882 19.859 6.44782 20.432L29.5148 34.975C30.7778 35.771 31.5438 37.16 31.5438 38.653C31.5438 41.053 29.5978 42.999 27.1978 42.999Z" fill="url(#fiu-mail-paint9)"/>
+                <path d="M27.1978 42.999H11.5888C7.94282 42.999 4.98682 40.043 4.98682 36.397V17.783C4.98682 18.859 5.53882 19.859 6.44782 20.432L29.5148 34.975C30.7778 35.771 31.5438 37.16 31.5438 38.653C31.5438 41.053 29.5978 42.999 27.1978 42.999Z" fill="url(#fiu-mail-paint10)"/>
+                <path d="M11.2821 36.236C9.88414 36.236 8.73714 35.799 7.84014 34.924C6.94314 34.05 6.49414 32.909 6.49414 31.501C6.49414 30.015 6.94914 28.812 7.86014 27.894C8.77114 26.976 9.96314 26.517 11.4371 26.517C12.8301 26.517 13.9631 26.956 14.8381 27.835C15.7171 28.714 16.1571 29.872 16.1571 31.31C16.1571 32.788 15.7011 33.979 14.7911 34.884C13.8851 35.786 12.7161 36.236 11.2821 36.236ZM11.3231 34.381C12.0851 34.381 12.6981 34.121 13.1621 33.601C13.6261 33.081 13.8581 32.357 13.8581 31.43C13.8581 30.464 13.6321 29.712 13.1821 29.174C12.7311 28.636 12.1291 28.368 11.3771 28.368C10.6021 28.368 9.97714 28.646 9.50414 29.201C9.03114 29.752 8.79414 30.482 8.79414 31.391C8.79414 32.314 9.03114 33.044 9.50414 33.581C9.97714 34.114 10.5831 34.381 11.3231 34.381Z" fill="white"/>
+                <path d="M6.453 23H16.547C18.454 23 20 24.546 20 26.453V36.547C20 38.454 18.454 40 16.547 40H6.453C4.546 40 3 38.454 3 36.547V26.453C3 24.546 4.546 23 6.453 23Z" fill="url(#fiu-mail-paint11)"/>
+                <path d="M6.453 23H16.547C18.454 23 20 24.546 20 26.453V36.547C20 38.454 18.454 40 16.547 40H6.453C4.546 40 3 38.454 3 36.547V26.453C3 24.546 4.546 23 6.453 23Z" fill="url(#fiu-mail-paint12)"/>
+                <path d="M11.4528 36.518C10.0528 36.518 8.90276 36.066 8.00376 35.163C7.10476 34.26 6.65576 33.081 6.65576 31.626C6.65576 30.09 7.11176 28.848 8.02476 27.9C8.93776 26.951 10.1318 26.477 11.6088 26.477C13.0048 26.477 14.1408 26.931 15.0168 27.839C15.8978 28.747 16.3378 29.944 16.3378 31.43C16.3378 32.957 15.8818 34.188 14.9688 35.122C14.0608 36.053 12.8888 36.518 11.4528 36.518ZM11.4928 34.601C12.2558 34.601 12.8708 34.332 13.3358 33.795C13.8008 33.257 14.0338 32.51 14.0338 31.552C14.0338 30.554 13.8078 29.777 13.3568 29.221C12.9048 28.665 12.3018 28.388 11.5478 28.388C10.7708 28.388 10.1448 28.675 9.67076 29.249C9.19676 29.818 8.95976 30.572 8.95976 31.512C8.95976 32.465 9.19676 33.219 9.67076 33.775C10.1448 34.326 10.7518 34.601 11.4928 34.601Z" fill="white"/>
+                <defs>
+                  <linearGradient id="fiu-mail-paint0" x1="7.20023" y1="19.028" x2="29.3252" y2="5.318" gradientUnits="userSpaceOnUse"><stop stop-color="#20A7FA"/><stop offset="0.4" stop-color="#3BD5FF"/><stop offset="1" stop-color="#C4B0FF"/></linearGradient>
+                  <linearGradient id="fiu-mail-paint1" x1="17.3402" y1="27.263" x2="29.6552" y2="7.55301" gradientUnits="userSpaceOnUse"><stop stop-color="#165AD9"/><stop offset="0.501" stop-color="#1880E5"/><stop offset="1" stop-color="#8587FF"/></linearGradient>
+                  <linearGradient id="fiu-mail-paint2" x1="28.0652" y1="24.413" x2="14.4002" y2="13.268" gradientUnits="userSpaceOnUse"><stop offset="0.237" stop-color="#448AFF" stop-opacity="0"/><stop offset="0.792" stop-color="#0032B1" stop-opacity="0.2"/></linearGradient>
+                  <linearGradient id="fiu-mail-paint3" x1="21.0148" y1="26.738" x2="42.6298" y2="12.908" gradientUnits="userSpaceOnUse"><stop stop-color="#1A43A6"/><stop offset="0.492" stop-color="#2052CB"/><stop offset="1" stop-color="#5F20CB"/></linearGradient>
+                  <linearGradient id="fiu-mail-paint4" x1="32.4598" y1="28.013" x2="19.3198" y2="16.643" gradientUnits="userSpaceOnUse"><stop stop-color="#0045B9" stop-opacity="0"/><stop offset="0.67" stop-color="#0D1F69" stop-opacity="0.2"/></linearGradient>
+                  <radialGradient id="fiu-mail-paint5" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(23.8674 5.68772) rotate(-90) scale(28.3528 30.6875)"><stop offset="0.568" stop-color="#275FF0" stop-opacity="0"/><stop offset="0.992" stop-color="#002177"/></radialGradient>
+                  <linearGradient id="fiu-mail-paint6" x1="43.0051" y1="30.398" x2="23.8501" y2="30.398" gradientUnits="userSpaceOnUse"><stop stop-color="#4DC4FF"/><stop offset="0.196" stop-color="#0FAFFF"/></linearGradient>
+                  <radialGradient id="fiu-mail-paint7" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(28.4266 38.6616) rotate(-45) scale(12.1506)"><stop offset="0.26" stop-color="#0060D1" stop-opacity="0.4"/><stop offset="0.908" stop-color="#0383F1" stop-opacity="0"/></radialGradient>
+                  <radialGradient id="fiu-mail-paint8" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(9.95743 47.621) rotate(-52.6577) scale(41.2455 37.2964)"><stop offset="0.732" stop-color="#F4A7F7" stop-opacity="0"/><stop offset="1" stop-color="#F4A7F7" stop-opacity="0.502"/></radialGradient>
+                  <radialGradient id="fiu-mail-paint9" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(18.4638 27.8871) rotate(123.339) scale(21.7621 56.4752)"><stop stop-color="#49DEFF"/><stop offset="0.724" stop-color="#29C3FF"/></radialGradient>
+                  <linearGradient id="fiu-mail-paint10" x1="2.29482" y1="30.398" x2="20.7448" y2="30.383" gradientUnits="userSpaceOnUse"><stop offset="0.206" stop-color="#6CE0FF"/><stop offset="0.535" stop-color="#50D5FF" stop-opacity="0"/></linearGradient>
+                  <radialGradient id="fiu-mail-paint11" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2.26691 23.6546) rotate(46.924) scale(22.4308)"><stop offset="0.039" stop-color="#0091FF"/><stop offset="0.919" stop-color="#183DAD"/></radialGradient>
+                  <radialGradient id="fiu-mail-paint12" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.4967 33.42) rotate(90) scale(11.928 13.7585)"><stop offset="0.558" stop-color="#0FA5F7" stop-opacity="0"/><stop offset="1" stop-color="#74C6FF" stop-opacity="0.502"/></radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <p class="app-card__name">FIU Mail</p>
+          </article>
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <img
+                class="app-card__icon"
+                src="https://www.figma.com/api/mcp/asset/ffe58985-7fdd-48a0-8284-31c0e6b25aad"
+                alt="LinkedIn Learning icon"
+                width="48"
+                height="48"
+              >
+            </div>
+            <p class="app-card__name">LinkedIn Learning</p>
+          </article>
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <img
+                class="app-card__icon"
+                src="https://www.figma.com/api/mcp/asset/3f9efac1-346c-4b46-86ce-97337c7388e1"
+                alt="Handshake icon"
+                width="48"
+                height="48"
+              >
+            </div>
+            <p class="app-card__name">Handshake</p>
+          </article>
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <img
+                class="app-card__icon"
+                src="https://www.figma.com/api/mcp/asset/6899d5b7-0310-429d-89b0-b60adb4d31e6"
+                alt="Zoom icon"
+                width="48"
+                height="48"
+              >
+            </div>
+            <p class="app-card__name">Zoom</p>
+          </article>
+
+          <article class="app-card" role="listitem">
+            <div class="app-card__icon-wrap">
+              <img
+                class="app-card__icon"
+                src="https://www.figma.com/api/mcp/asset/9d9b8c25-ef42-41c4-8f64-bb9ce79bdcf2"
+                alt="Office 365 icon"
+                width="48"
+                height="48"
+              >
+            </div>
+            <p class="app-card__name">Office 365</p>
+          </article>
+
+        </div>
+
+        <button class="carousel-nav carousel-nav--next" aria-label="Scroll apps right">
+          <img src="public/assets/icons/icon-right-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+      </div>
+
+      <!-- Apps carousel chevrons -->
+      <div class="carousel-chevrons apps-chevrons">
+        <button class="carousel-chevron-btn" aria-label="Scroll apps left">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 5L9 12L16 19" stroke="#CFCFCF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="carousel-chevron-btn" aria-label="Scroll apps right">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 19L16 12L9 5" stroke="#CFCFCF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ───────────────────────────────────────────
+         DISCOVER SECTION
+    ─────────────────────────────────────────────── -->
+    <section class="section section--discover" aria-labelledby="discover-heading">
+      <h2 class="section__title" id="discover-heading">Discover</h2>
+
+      <div class="discover-carousel" aria-label="Discover FIU">
+
+        <button class="carousel-nav carousel-nav--prev" aria-label="Scroll discover left">
+          <img src="public/assets/icons/icon-left-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+        <div class="discover-carousel__track" role="list">
+
+          <article class="discover-card" role="listitem">
+            <img
+              class="discover-card__img"
+              src="public/assets/images/search courses.jpg"
+              alt="Search Courses"
+            >
+            <p class="discover-card__label">Search Courses</p>
+          </article>
+
+          <article class="discover-card" role="listitem">
+            <img
+              class="discover-card__img"
+              src="public/assets/images/parking and transportation.jpg"
+              alt="Parking and Transportation"
+            >
+            <p class="discover-card__label">Parking &amp; Transportation</p>
+          </article>
+
+          <article class="discover-card" role="listitem">
+            <img
+              class="discover-card__img"
+              src="public/assets/images/pantherdining.jpg"
+              alt="Panther Dining"
+            >
+            <p class="discover-card__label">Panther Dining</p>
+          </article>
+
+        </div>
+
+        <button class="carousel-nav carousel-nav--next" aria-label="Scroll discover right">
+          <img src="public/assets/icons/icon-right-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+
+      </div>
+
+      <!-- Discover carousel chevrons -->
+      <div class="carousel-chevrons discover-chevrons">
+        <button class="carousel-chevron-btn" aria-label="Scroll discover left">
+          <img src="public/assets/icons/icon-left-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+        <button class="carousel-chevron-btn" aria-label="Scroll discover right">
+          <img src="public/assets/icons/icon-right-chevron.svg" alt="" width="24" height="24" aria-hidden="true">
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ───────────────────────────────────────────
+         IT HELP CTA CARD
+         Gradient: 174.94° · #0953FA → brand/fiu-blue
+    ─────────────────────────────────────────────── -->
+    <section class="cta-card" aria-labelledby="cta-heading">
+      <div class="cta-card__inner">
+        <h2 class="cta-card__title" id="cta-heading">
+          Need help with FIU technology or services?
+        </h2>
+        <p class="cta-card__body">
+          Get fast assistance for accounts, apps, and campus systems
+          from the FIU IT Support team.
+        </p>
+        <button class="btn btn--teritiary">Contact IT Support</button>
+      </div>
+    </section>
+
+
+  </main>
+</div>
+
+<!--
+  NOTE: Figma-hosted image assets expire after 7 days.
+  Replace all src values pointing to figma.com/api/mcp/asset/…
+  with permanent URLs before deploying to production.
+-->
+
+<script>
+  (function () {
+    /* ── Communications carousel ─────────────────────────────────────
+       Sliding-track carousel: whole cards translate as one unit.
+       DOM always holds 3 visible cards + 1 incoming card (4 total
+       during animation). On each advance:
+         1. Append new card off-screen right
+         2. Fade out center card text (remove .is-center)
+         3. Translate the entire track left by one slot width
+         4. After transition: remove leftmost card, promote new center,
+            reset track offset instantly to preserve seamless loop
+    ──────────────────────────────────────────────────────────────── */
+    var carousel = document.querySelector('.comms-carousel');
+    var track    = document.querySelector('.comms-carousel__track');
+    var controls = document.querySelector('.comms-carousel__controls');
+    var prevBtn  = controls ? controls.querySelector('.comms-carousel__nav--prev') : null;
+    var nextBtn  = controls ? controls.querySelector('.comms-carousel__nav--next') : null;
+    var dotsWrap = controls ? controls.querySelector('.comms-carousel__dots') : null;
+    if (!track || !carousel) return;
+
+    var slides = [
+      {
+        src:  'https://www.figma.com/api/mcp/asset/21cb7e08-e5f2-4d18-a6ee-a41af6926991',
+        alt:  'Use AI tools to empower your day',
+        text: 'Read about how to use AI Tools to empower your day-to-day life.',
+        lg:   false
+      },
+      {
+        src:  'https://www.figma.com/api/mcp/asset/22027cc9-8edf-49fe-9ca0-3ff74a87212a',
+        alt:  '#BeCyberSecure campaign',
+        text: 'We\u2019re calling on you Panthers to take action and #BeCyberSecure!',
+        lg:   true
+      },
+      {
+        src:  'https://www.figma.com/api/mcp/asset/4af50402-32e6-4e68-ae4f-aa0696340eb5',
+        alt:  'FIU Mobile app',
+        text: 'FIU Mobile gives you everything you need for campus life.',
+        lg:   false
+      }
+    ];
+
+    var total    = slides.length;
+    var SLIDE_MS = 700;
+    var DELAY    = 8700;
+    var EASING   = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+    var busy     = false;
+    var timer;
+    var currentX = 0; /* current track translateX in px */
+    var slotW    = 0; /* card width + gap */
+    var headIdx  = 0; /* slides[] index of the leftmost card in DOM */
+    var dots     = [];
+
+    function normalizeCenterCard() {
+      var cards = track.querySelectorAll('.comms-card');
+      cards.forEach(function (card) { card.classList.remove('is-center'); });
+      if (cards[1]) cards[1].classList.add('is-center');
+      updateDots();
+    }
+
+    function activeCenterIdx() {
+      return ((headIdx + 1) % total + total) % total;
+    }
+
+    function updateDots() {
+      if (!dots.length) return;
+      var active = activeCenterIdx();
+      dots.forEach(function (dot, idx) {
+        var isActive = idx === active;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+      });
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      dots = slides.map(function (_, idx) {
+        var dot = document.createElement('button');
+        dot.className = 'comms-carousel__dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+        dot.addEventListener('click', function () {
+          if (idx === activeCenterIdx() || busy) return;
+          stop();
+          if (idx > activeCenterIdx()) {
+            advance();
+          } else {
+            prev();
+          }
+          setTimeout(start, DELAY);
+        });
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+      updateDots();
+    }
+
+    /* ── Layout: compute card width and initial track offset ── */
+    function calcLayout() {
+      var rootStyles = getComputedStyle(document.documentElement);
+      var peekPx = parseFloat(rootStyles.getPropertyValue('--c-peek')) || 28;
+      var gapPx  = parseFloat(rootStyles.getPropertyValue('--c-gap')) || 8;
+      var W      = carousel.offsetWidth;
+      var isDesktop = window.matchMedia('(min-width: 1280px)').matches;
+      var cardW  = isDesktop ? 900 : (W - 2 * peekPx - 2 * gapPx);
+      slotW = cardW + gapPx;
+      /* Expose to CSS so cards size themselves */
+      document.documentElement.style.setProperty('--card-w', cardW + 'px');
+      /* Align center card: desktop true-center, mobile/tablet fixed-peek geometry */
+      var centerLeft = isDesktop ? ((W - cardW) / 2) : (peekPx + gapPx);
+      setTrackX(centerLeft - slotW, false);
+      normalizeCenterCard();
+    }
+
+    function setTrackX(x, animate) {
+      currentX = x;
+      track.style.transition = animate
+        ? 'transform ' + SLIDE_MS + 'ms ' + EASING
+        : 'none';
+      track.style.transform = 'translateX(' + x + 'px)';
+    }
+
+    /* ── Build a card element from a slides[] index ── */
+    function makeCard(idx) {
+      var s  = slides[((idx % total) + total) % total];
+      var el = document.createElement('article');
+      el.className = 'comms-card';
+      el.setAttribute('role', 'listitem');
+      el.innerHTML =
+        '<img class="comms-card__img" src="' + s.src + '" alt="' + (s.alt || '') + '">' +
+        '<div class="comms-card__overlay" aria-hidden="true"></div>' +
+        '<div class="comms-card__content">' +
+          '<p class="comms-card__text comms-card__text--lg">' + s.text + '</p>' +
+          '<span class="comms-card__arrow" aria-hidden="true">' +
+            '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+              '<path d="M8.46154 3L14 8.5L8.46154 14M13.2308 8.5H2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>' +
+          '</span>' +
+        '</div>';
+      return el;
+    }
+
+    /* ── Advance one slide to the left ── */
+    function advance() {
+      if (busy) return;
+      busy = true;
+
+      /* 1. Append incoming card (off-screen right) */
+      track.appendChild(makeCard(headIdx + 3));
+
+      /* 2. Slide track left by one slot — run on next two frames so the
+            appended card has been painted before the transition starts */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          track.offsetWidth; /* force reflow so transition:none is cleared */
+          setTrackX(currentX - slotW, true);
+
+          /* 3. After transition: clean up and reset */
+          setTimeout(function () {
+            /* Remove the card that slid off-screen left */
+            track.removeChild(track.firstElementChild);
+            headIdx++;
+
+            /* Promote a single center card after swipe completes */
+            var cards = track.querySelectorAll('.comms-card');
+            cards.forEach(function (card) { card.classList.remove('is-center'); });
+            cards[1].classList.add('is-center');
+            updateDots();
+
+            /* Reset track offset by +slotW (removing first child shifts
+               all remaining children left by slotW in the flex layout,
+               so we compensate to keep them in the same visual position) */
+            track.style.transition = 'none';
+            track.offsetWidth; /* force reflow */
+            currentX += slotW;
+            track.style.transform = 'translateX(' + currentX + 'px)';
+
+            busy = false;
+          }, SLIDE_MS);
+        });
+      });
+    }
+
+    /* ── Slide backward one step ── */
+    function prev() {
+      if (busy) return;
+      busy = true;
+
+      /* 1. Prepend incoming card (off-screen left) */
+      track.insertBefore(makeCard(headIdx - 1), track.firstElementChild);
+
+      /* 2. Compensate offset instantly so prepended card parks off-screen left */
+      track.style.transition = 'none';
+      track.offsetWidth;
+      currentX -= slotW;
+      track.style.transform = 'translateX(' + currentX + 'px)';
+
+      /* 3. Animate track right by one slot */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          track.offsetWidth;
+          setTrackX(currentX + slotW, true);
+
+          setTimeout(function () {
+            /* Remove card that slid off-screen right */
+            track.removeChild(track.lastElementChild);
+            headIdx--;
+
+            /* Promote a single center card after swipe completes */
+            var cards = track.querySelectorAll('.comms-card');
+            cards.forEach(function (card) { card.classList.remove('is-center'); });
+            cards[1].classList.add('is-center');
+            updateDots();
+
+            /* No offset adjustment needed — removing last child doesn't shift flex positions */
+            busy = false;
+          }, SLIDE_MS);
+        });
+      });
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(advance, DELAY);
+    }
+    function stop()  { clearInterval(timer); }
+
+    /* ── Init ── */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { calcLayout(); });
+    });
+    buildDots();
+    updateDots();
+    window.addEventListener('resize', calcLayout);
+
+    /* Pause on touch */
+    track.addEventListener('touchstart', stop, { passive: true });
+    track.addEventListener('touchend', function () { setTimeout(start, DELAY); }, { passive: true });
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (busy) return;
+        stop();
+        advance();
+        setTimeout(start, DELAY);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        if (busy) return;
+        stop();
+        prev();
+        setTimeout(start, DELAY);
+      });
+    }
+
+    /* Auto-play across all breakpoints */
+    start();
+  })();
+
+  /* ── Apps carousel: infinite horizontal loop ──────────────── */
+  (function () {
+    var section = document.querySelector('.section--apps');
+    var track = section ? section.querySelector('.app-carousel__track') : null;
+    if (!section || !track) return;
+
+    var originals = Array.prototype.slice.call(track.querySelectorAll('.app-card'));
+    if (originals.length < 2) return;
+
+    track.style.scrollSnapType = 'none';
+
+    var baseWidth = track.scrollWidth;
+    if (!baseWidth) return;
+
+    var repeatsPerSide = 3;
+    var prependFrag = document.createDocumentFragment();
+    var appendFrag = document.createDocumentFragment();
+
+    for (var r = 0; r < repeatsPerSide; r++) {
+      originals.slice().reverse().forEach(function (card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
+        prependFrag.appendChild(clone);
+      });
+    }
+    for (var i = 0; i < repeatsPerSide; i++) {
+      originals.forEach(function (card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
+        appendFrag.appendChild(clone);
+      });
+    }
+
+    track.insertBefore(prependFrag, track.firstChild);
+    track.appendChild(appendFrag);
+
+    var firstOriginal = originals[0];
+    var firstAfterOriginals = originals[originals.length - 1].nextElementSibling;
+    var loopStart = baseWidth * repeatsPerSide;
+    var loopWidth = 0;
+    var adjusting = false;
+    var normalizeQueued = false;
+
+    function normalize() {
+      if (!loopWidth) return;
+      var relative = track.scrollLeft - loopStart;
+      if (relative > -1 && relative < loopWidth - 1) return;
+      var wrapped = ((relative % loopWidth) + loopWidth) % loopWidth;
+      track.scrollLeft = loopStart + wrapped;
+    }
+
+    function measure(resetToStart) {
+      var previousStart = loopStart;
+      var previousWidth = loopWidth;
+      loopStart = firstOriginal.offsetLeft;
+      loopWidth = Math.max(0, firstAfterOriginals.offsetLeft - loopStart);
+      if (!loopWidth) return false;
+
+      adjusting = true;
+      if (resetToStart || !previousWidth) {
+        track.scrollLeft = loopStart;
+      } else {
+        var relative = track.scrollLeft - previousStart;
+        relative = ((relative % previousWidth) + previousWidth) % previousWidth;
+        track.scrollLeft = loopStart + relative;
+      }
+      adjusting = false;
+      return true;
+    }
+
+    track.addEventListener('scroll', function () {
+      if (adjusting || !loopWidth || normalizeQueued) return;
+      normalizeQueued = true;
+      requestAnimationFrame(function () {
+        normalizeQueued = false;
+        if (adjusting || !loopWidth) return;
+        adjusting = true;
+        normalize();
+        adjusting = false;
+      });
+    }, { passive: true });
+
+    function step() {
+      return track.clientWidth * 0.75;
+    }
+
+    var prevButtons = section.querySelectorAll('[aria-label="Scroll apps left"]');
+    var nextButtons = section.querySelectorAll('[aria-label="Scroll apps right"]');
+    prevButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        track.scrollBy({ left: -step(), behavior: 'smooth' });
+      });
+    });
+    nextButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        track.scrollBy({ left: step(), behavior: 'smooth' });
+      });
+    });
+
+    function initWithRetries(triesLeft) {
+      requestAnimationFrame(function () {
+        if (!measure(true) && triesLeft > 0) {
+          initWithRetries(triesLeft - 1);
+        }
+      });
+    }
+
+    initWithRetries(20);
+    window.addEventListener('load', function () {
+      measure(true);
+    });
+    window.addEventListener('resize', function () {
+      measure(false);
+    });
+  })();
+
+  /* ── Apps & Discover scroll chevrons ──────────────────────── */
+  (function () {
+    function bindScrollChevrons(chevronSelector, trackSelector) {
+      var chevrons = document.querySelector(chevronSelector);
+      var track    = document.querySelector(trackSelector);
+      if (!chevrons || !track) return;
+      var btns = chevrons.querySelectorAll('.carousel-chevron-btn');
+      var scrollAmt = function () { return track.offsetWidth * 0.75; };
+      btns[0].addEventListener('click', function () {
+        track.scrollBy({ left: -scrollAmt(), behavior: 'smooth' });
+      });
+      btns[1].addEventListener('click', function () {
+        track.scrollBy({ left:  scrollAmt(), behavior: 'smooth' });
+      });
+    }
+    bindScrollChevrons('.quick-links-chevrons', '.quick-links__track');
+    bindScrollChevrons('.discover-chevrons', '.discover-carousel__track');
+  })();
+
+  /* ── Discover carousel: default to center card on load ── */
+  (function () {
+    var track = document.querySelector('.discover-carousel__track');
+    if (!track) return;
+    function alignDiscoverTrack() {
+      var isDesktop = window.matchMedia('(min-width: 1280px)').matches;
+      if (isDesktop) {
+        track.scrollLeft = 0;
+        return;
+      }
+      var cards = track.querySelectorAll('.discover-card');
+      if (cards.length < 2) return;
+      var card = cards[1]; /* middle card */
+      track.scrollLeft = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+    }
+    requestAnimationFrame(function () {
+      requestAnimationFrame(alignDiscoverTrack);
+    });
+    window.addEventListener('resize', alignDiscoverTrack);
+  })();
+
+  /* ── Header quick-link search mode ────────────────────────── */
+  (function () {
+    var page = document.querySelector('.page');
+    var logoLink = document.querySelector('.navbar__logo');
+    var searchBtn = document.querySelector('.navbar__search-btn');
+    var searchIcon = document.querySelector('.navbar__search-icon');
+    var searchForm = document.querySelector('.navbar-search');
+    var searchInput = document.querySelector('.navbar-search__input');
+    var searchClearBtn = document.querySelector('.navbar-search__clear');
+    var resultsPanel = document.querySelector('.search-results');
+    var resultsList = document.querySelector('.search-results__list');
+    var quickLinkNodes = Array.prototype.slice.call(document.querySelectorAll('.quick-link'));
+    var appCards = Array.prototype.slice.call(document.querySelectorAll('.app-carousel__track .app-card:not([data-clone="true"])'));
+    var discoverCards = Array.prototype.slice.call(document.querySelectorAll('.discover-card'));
+    var ctaBtn = document.querySelector('.cta-card .btn--teritiary');
+    if (!page || !logoLink || !searchBtn || !searchIcon || !searchForm || !searchInput || !searchClearBtn || !resultsPanel || !resultsList) return;
+
+    var SEARCH_ICON = 'public/assets/icons/search-icon.svg';
+    var CLOSE_ICON = 'public/assets/icons/icon-x.svg';
+
+    var searchItems = quickLinkNodes.map(function (node) {
+      var title = node.getAttribute('data-search-title') || '';
+      var subtext = node.getAttribute('data-search-subtext') || 'Open quick link';
+      var href = node.getAttribute('href') || '#';
+      var icon = node.querySelector('.quick-link__icon');
+      return {
+        title: title,
+        subtext: subtext,
+        href: href,
+        iconMarkup: icon ? icon.outerHTML : ''
+      };
+    });
+
+    appCards.forEach(function (card) {
+      var nameEl = card.querySelector('.app-card__name');
+      var title = nameEl ? nameEl.textContent.trim() : '';
+      if (!title) return;
+      searchItems.push({
+        title: title,
+        subtext: 'Open app',
+        href: '#apps-heading',
+        iconMarkup: '<svg class="search-result__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 7.5H7.5C5.567 7.5 4 9.067 4 11V13C4 14.933 5.567 16.5 7.5 16.5H10" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M14 7.5H16.5C18.433 7.5 20 9.067 20 11V13C20 14.933 18.433 16.5 16.5 16.5H14" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M9 12H15" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/></svg>'
+      });
+    });
+
+    discoverCards.forEach(function (card) {
+      var nameEl = card.querySelector('.discover-card__label');
+      var title = nameEl ? nameEl.textContent.trim() : '';
+      if (!title) return;
+      searchItems.push({
+        title: title,
+        subtext: 'Discover FIU resource',
+        href: '#discover-heading',
+        iconMarkup: '<svg class="search-result__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 7.5H7.5C5.567 7.5 4 9.067 4 11V13C4 14.933 5.567 16.5 7.5 16.5H10" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M14 7.5H16.5C18.433 7.5 20 9.067 20 11V13C20 14.933 18.433 16.5 16.5 16.5H14" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M9 12H15" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/></svg>'
+      });
+    });
+
+    if (ctaBtn) {
+      searchItems.push({
+        title: 'Contact IT Support',
+        subtext: 'Get fast assistance for accounts, apps, and campus systems',
+        href: '#cta-heading',
+        iconMarkup: '<svg class="search-result__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 7.5H7.5C5.567 7.5 4 9.067 4 11V13C4 14.933 5.567 16.5 7.5 16.5H10" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M14 7.5H16.5C18.433 7.5 20 9.067 20 11V13C20 14.933 18.433 16.5 16.5 16.5H14" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M9 12H15" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/></svg>'
+      });
+    }
+
+    function renderResults(query) {
+      var term = (query || '').trim().toLowerCase();
+      searchClearBtn.classList.toggle('is-visible', term.length > 0);
+      var items = !term
+        ? []
+        : searchItems.filter(function (item) {
+            return item.title.toLowerCase().indexOf(term) !== -1 || item.subtext.toLowerCase().indexOf(term) !== -1;
+          });
+
+      resultsList.innerHTML = '';
+      items.forEach(function (item) {
+        var li = document.createElement('li');
+        li.className = 'search-result';
+        li.innerHTML =
+          (item.iconMarkup || '<svg class="search-result__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 7.5H7.5C5.567 7.5 4 9.067 4 11V13C4 14.933 5.567 16.5 7.5 16.5H10" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M14 7.5H16.5C18.433 7.5 20 9.067 20 11V13C20 14.933 18.433 16.5 16.5 16.5H14" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/><path d="M9 12H15" stroke="#354ED4" stroke-width="2" stroke-linecap="round"/></svg>') +
+          '<a class="search-result__text" href="' + item.href + '">' +
+            '<span class="search-result__title">' + item.title + '</span>' +
+            '<span class="search-result__subtext">' + item.subtext + '</span>' +
+          '</a>';
+        resultsList.appendChild(li);
+      });
+    }
+
+    function setSearchMode(active) {
+      page.classList.toggle('search-active', active);
+      resultsPanel.hidden = !active;
+      searchBtn.setAttribute('aria-expanded', active ? 'true' : 'false');
+      searchBtn.setAttribute('aria-label', active ? 'Close search' : 'Open search');
+      searchIcon.setAttribute('src', active ? CLOSE_ICON : SEARCH_ICON);
+      if (active) {
+        positionSearchResults();
+        renderResults(searchInput.value);
+        setTimeout(function () { searchInput.focus(); }, 0);
+      } else {
+        searchInput.value = '';
+        resultsList.innerHTML = '';
+        searchClearBtn.classList.remove('is-visible');
+      }
+    }
+
+    function positionSearchResults() {
+      var bottom = searchForm.getBoundingClientRect().bottom;
+      resultsPanel.style.marginTop = Math.round(bottom) + 'px';
+    }
+
+    searchBtn.addEventListener('click', function () {
+      var next = !page.classList.contains('search-active');
+      setSearchMode(next);
+    });
+
+    logoLink.addEventListener('click', function (event) {
+      if (!page.classList.contains('search-active')) return;
+      event.preventDefault();
+      setSearchMode(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    searchInput.addEventListener('input', function () {
+      renderResults(searchInput.value);
+    });
+
+    searchClearBtn.addEventListener('click', function () {
+      searchInput.value = '';
+      renderResults('');
+      searchInput.focus();
+    });
+
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && page.classList.contains('search-active')) {
+        setSearchMode(false);
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (!page.classList.contains('search-active')) return;
+      positionSearchResults();
+    });
+  })();
+
+  /* ── Mobile/Tablet role bottom sheet ─────────────────────── */
+  (function () {
+    var pill = document.querySelector('.persona-pill');
+    var label = document.querySelector('.persona-pill__label');
+    var sheet = document.querySelector('.persona-sheet');
+    var panel = document.querySelector('.persona-sheet__panel');
+    var backdrop = document.querySelector('.persona-sheet-backdrop');
+    var closeBtn = document.querySelector('.persona-sheet__close');
+    var options = Array.prototype.slice.call(document.querySelectorAll('.persona-sheet__option'));
+    if (!pill || !label || !sheet || !panel || !backdrop || !closeBtn || !options.length) return;
+
+    function isDesktop() {
+      return window.matchMedia('(min-width: 1280px)').matches;
+    }
+
+    function openSheet() {
+      if (isDesktop()) return;
+      sheet.hidden = false;
+      backdrop.hidden = false;
+      requestAnimationFrame(function () {
+        sheet.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        panel.classList.add('is-open');
+      });
+      pill.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeSheet() {
+      sheet.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      panel.classList.remove('is-open');
+      setTimeout(function () {
+        sheet.hidden = true;
+        backdrop.hidden = true;
+      }, 220);
+      pill.setAttribute('aria-expanded', 'false');
+    }
+
+    function selectRole(nextRole) {
+      label.textContent = nextRole;
+      options.forEach(function (opt) {
+        var selected = opt.getAttribute('data-role') === nextRole;
+        opt.classList.toggle('is-selected', selected);
+      });
+    }
+
+    pill.addEventListener('click', function () {
+      if (sheet.hidden) openSheet();
+      else closeSheet();
+    });
+
+    backdrop.addEventListener('click', closeSheet);
+    sheet.addEventListener('click', function (event) {
+      if (event.target === sheet) closeSheet();
+    });
+    closeBtn.addEventListener('click', closeSheet);
+
+    options.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        selectRole(opt.getAttribute('data-role') || 'Student');
+        closeSheet();
+      });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !sheet.hidden) closeSheet();
+    });
+
+    window.addEventListener('resize', function () {
+      if (isDesktop() && !sheet.hidden) closeSheet();
+    });
+  })();
+</script>
+</body>
+</html>
